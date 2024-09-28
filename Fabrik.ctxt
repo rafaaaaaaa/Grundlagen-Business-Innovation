@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=Fabrik
+comment1.params=standardTueren\ premiumTueren
+comment1.target=void\ bestellungAufgeben(int,\ int)
+comment2.params=
+comment2.target=void\ bestellungAusgeben()
+numComments=3

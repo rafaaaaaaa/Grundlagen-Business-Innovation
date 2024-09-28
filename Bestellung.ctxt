@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=Bestellung
+comment1.params=anzahlStandardTueren\ anzahlPremiumTueren
+comment1.target=Bestellung(int,\ int)
+comment2.params=
+comment2.target=void\ bestellungBestaetigen()
+comment3.params=
+comment3.target=boolean\ gibBestellBestaetigung()
+comment4.params=zeit
+comment4.target=void\ setzeBeschaffungszeit(int)
+comment5.params=
+comment5.target=int\ gibBestellungsNr()
+comment6.params=
+comment6.target=int\ gibAnzahlStandardTueren()
+comment7.params=
+comment7.target=int\ gibAnzahlPremiumTueren()
+numComments=8

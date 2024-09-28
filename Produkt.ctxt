@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Produkt
+comment1.params=
+comment1.target=Produkt()
+comment2.params=zustand
+comment2.target=void\ zustandAendern(int)
+comment3.params=
+comment3.target=int\ aktuelleZustand()
+numComments=4

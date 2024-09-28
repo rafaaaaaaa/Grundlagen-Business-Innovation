@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Standardtuer
+comment1.params=
+comment1.target=Standardtuer()
+comment2.params=
+comment2.target=int\ gibHolzeinheiten()
+comment3.params=
+comment3.target=int\ gibSchrauben()
+comment4.params=
+comment4.target=int\ gibKartoneinheiten()
+comment5.params=
+comment5.target=int\ gibProduktionszeit()
+numComments=6

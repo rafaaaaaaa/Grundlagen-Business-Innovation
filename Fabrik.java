@@ -3,6 +3,13 @@ import java.util.ArrayList;
 public class Fabrik
 {
     private ArrayList<Bestellung> bestellungen = new ArrayList<Bestellung>();
+    
+    public void main(){
+        bestellungAufgeben(2, 4);
+        bestellungAufgeben(1, 0);
+        bestellungAusgeben();
+    }
+    
    
     public void bestellungAufgeben(int standardTueren, int premiumTueren)
     {
@@ -12,16 +19,18 @@ public class Fabrik
             return;
         }
         
-        Bestellung neueBestellung = new Bestellung(standardTueren, premiumTueren);
+        Bestellung neueBestellung = new Bestellung(standardTueren, premiumTueren);      
         bestellungen.add(neueBestellung);        
     }
    
     public void bestellungAusgeben()
     {
+        System.out.println("Anzahl Premiumtüren = 1");
         for (Bestellung bestellung : bestellungen) 
         {
-            System.out.println(bestellung.gibBestellungsNr());
+            
             // anderes Zeug ausgeben
-        }      
+        }  
+        
     }
 }

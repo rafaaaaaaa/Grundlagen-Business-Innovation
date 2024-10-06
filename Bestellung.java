@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Bestellung
 {
@@ -12,20 +13,11 @@ public class Bestellung
     public Bestellung(int anzahlStandardTueren, int anzahlPremiumTueren)
     {     
        bestellBestaetigung = false;
+       bestellungsNr = generiereBestellungsNr();
        this.anzahlStandardTueren = anzahlStandardTueren;
        this.anzahlPremiumTueren = anzahlPremiumTueren;
-       
-       for(int i = 0; i < anzahlStandardTueren; i++) 
-       {
-           Standardtuer neueStandardTuer = new Standardtuer();
-           bestellteProdukte.add(neueStandardTuer);
-       }
-       
-       for(int i = 0; i < anzahlPremiumTueren; i++) 
-       {
-           Premiumtuer neuePremiumTuer = new Premiumtuer();
-           bestellteProdukte.add(neuePremiumTuer);
-       }       
+       fügeProduktZuBestellung(anzahlStandardTueren, Standardtuer.class);
+       fügeProduktZuBestellung(anzahlStandardTueren, Premiumtuer.class);
     }
     
     public void bestellungBestaetigen(){
@@ -59,5 +51,22 @@ public class Bestellung
     
     public int gibAnzahlPremiumTueren(){
         return anzahlPremiumTueren;
-    }      
+    }   
+    
+    private int generiereBestellungsNr(){
+        Random random = new Random();
+        int bestellungsNr = 100000 + random.nextInt(900000);
+        return bestellungsNr;
+    }
+    
+    private <T extends Produkt> void fügeProduktZuBestellung(int anzahl, Class<T> produktTyp) {
+        for (int i = 0; i < anzahl; i++) {
+            try {
+                T newInstance = produktTyp.getDeclaredConstructor().newInstance();
+                bestellteProdukte.add(newInstance);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

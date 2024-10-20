@@ -6,9 +6,7 @@ public class Fabrik
     private int bestellungsNr = 0;
     
     public void main(){
-        bestellungAufgeben(2, 4);
-        bestellungAufgeben(1, 0);
-        bestellungAusgeben();
+
     }
     
    

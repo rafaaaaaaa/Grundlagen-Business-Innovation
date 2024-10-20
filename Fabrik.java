@@ -3,6 +3,7 @@ import java.util.ArrayList;
 public class Fabrik
 {
     private ArrayList<Bestellung> bestellungen = new ArrayList<Bestellung>();
+    private int bestellungsNr = 0;
     
     public void main(){
         bestellungAufgeben(2, 4);
@@ -13,24 +14,38 @@ public class Fabrik
    
     public void bestellungAufgeben(int standardTueren, int premiumTueren)
     {
-        if(standardTueren < 1 || premiumTueren < 1)
+        if(standardTueren < 1 && premiumTueren < 1)
         {
             System.out.println("Fehlerhafte Anzahl Türen ausgegeben. Bestellung wird nicht aufgegeben");
             return;
         }
         
-        Bestellung neueBestellung = new Bestellung(standardTueren, premiumTueren);      
+        bestellungsNr = bestellungsNr + 1;       
+        Bestellung neueBestellung = new Bestellung(bestellungsNr, standardTueren, premiumTueren); 
+        neueBestellung.setzeBeschaffungsZeit(1440); //in Minuten (1440min = 1 Tag)
         bestellungen.add(neueBestellung);        
     }
    
     public void bestellungAusgeben()
-    {
-        System.out.println("Anzahl Premiumtüren = 1");
+    {   
+        String resultOutput = "";
         for (Bestellung bestellung : bestellungen) 
         {
+            resultOutput += "Bestellnummer: " + bestellung.gibBestellungsNr() + "\n";
+            resultOutput += "Anzahl Standardtüren: " + bestellung.gibAnzahlStandardTueren() + "\n";
+            resultOutput += "Anzahl Premiumtüren: " + bestellung.gibAnzahlPremiumTueren() + "\n";
+            resultOutput += "Ist Bestellung bestätigt: ";
             
-            // anderes Zeug ausgeben
-        }  
-        
+            if(bestellung.gibBestellBestaetigung()) 
+            {
+                resultOutput += "Ja\n";
+            }
+            else 
+            {
+                 resultOutput += "Nein\n";
+            }
+            resultOutput += "Beschaffungszeit: " + bestellung.gibBeschaffungsZeit() + "\n";  
+        }          
+         System.out.println(resultOutput);
     }
 }

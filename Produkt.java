@@ -8,20 +8,20 @@ public class Produkt
 
     public Produkt()
     {
-        zustand = 0;
+        zustand = 1;
     }
 
     public void zustandAendern(int zustand)
     {
-        if(this.zustand < zustand)
+        if(zustand > 4 || zustand < 1)
         {
-            // Error Handling
+            System.out.println("Ungültiger Zustand. Zustände sind entweder 1, 2, 3 oder 4");
         }
         
-        if(zustand > 4)
+        if(this.zustand < zustand)
         {
-            // Error Handling
-        }
+            System.out.println("Ungültige Zustandsänderung. Der nächste Zustand muss immer größer als der vorherige sein");
+        } 
         
         this.zustand = zustand;
     }

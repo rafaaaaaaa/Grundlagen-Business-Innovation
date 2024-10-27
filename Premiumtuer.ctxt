@@ -1,13 +1,13 @@
 #BlueJ class context
 comment0.target=Premiumtuer
 comment1.params=
-comment1.target=Premiumtuer()
+comment1.target=int\ gibHolzeinheiten()
 comment2.params=
-comment2.target=int\ gibHolzeinheiten()
+comment2.target=int\ gibSchrauben()
 comment3.params=
-comment3.target=int\ gibSchrauben()
+comment3.target=int\ gibGlaseinheiten()
 comment4.params=
-comment4.target=int\ gibGlaseinheiten()
+comment4.target=int\ gibFarbeinheiten()
 comment5.params=
 comment5.target=int\ gibKartoneinheiten()
 comment6.params=

@@ -1,37 +1,35 @@
 public class Standardtuer extends Produkt
 {
-    private int holzeinheiten;
-    private int schrauben;
-    private int farbeinheiten;
-    private int kartoneinheiten;
-    private int produktionsZeit;
+    //Initialisierung der Werte laut Aufgabestellung
+    private static final int HOLZEINHEITEN = 2;
+    private static final int SCHRAUBEN = 10;
+    private static final int FARBEINHEITEN = 2;
+    private static final int KARTONEINHEITEN = 1;
+    private static final int PRODUKTIONSZEIT = 10;
     
-    public Standardtuer()
-    {
-        holzeinheiten = 2;
-        schrauben = 10;
-        farbeinheiten = 2;
-        kartoneinheiten = 1; 
-        produktionsZeit = 10;
-    }
-
+    //Getter-Methoden sind laut Klassendiagramm vorgegeben, machen aber keinen Sinn. Mit Premiumtuer.HOLZEINHEITEN könnte direkt auf die statische Variable zugegriffen werden. Wir entschieden uns trotzdem dafür, da das Musterlösung-Klassendiagramm dies vorgibt.
     public int gibHolzeinheiten()
     {
-        return holzeinheiten;
+        return HOLZEINHEITEN;
     }
     
     public int gibSchrauben()
     {
-        return schrauben;
+        return SCHRAUBEN;
     }
         
+    public int gibFarbeinheiten()
+    {
+        return FARBEINHEITEN;
+    }
+    
     public int gibKartoneinheiten()
     {
-        return kartoneinheiten;
+        return KARTONEINHEITEN;
     }
     
     public int gibProduktionszeit()
     {
-        return produktionsZeit;
-    }   
+        return PRODUKTIONSZEIT;
+    }    
 }

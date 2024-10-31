@@ -5,7 +5,7 @@ public class Standardtuer extends Produkt
     private static final int SCHRAUBEN = 10;
     private static final int FARBEINHEITEN = 2;
     private static final int KARTONEINHEITEN = 1;
-    private static final int PRODUKTIONSZEIT = 10;
+    static final int PRODUKTIONSZEIT = 10;
     
     //Getter-Methoden sind laut Klassendiagramm vorgegeben, machen aber keinen Sinn. Mit Premiumtuer.HOLZEINHEITEN könnte direkt auf die statische Variable zugegriffen werden. Wir entschieden uns trotzdem dafür, da das Musterlösung-Klassendiagramm dies vorgibt.
     public int gibHolzeinheiten()

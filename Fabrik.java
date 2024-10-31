@@ -2,11 +2,20 @@ import java.util.ArrayList;
 
 public class Fabrik
 {
-    private ArrayList<Bestellung> bestellungen = new ArrayList<Bestellung>();
-    private int bestellungsNr = 0;
+    private Lager lager;
+    private ArrayList<Bestellung> bestellungen;
+    private int bestellungsNr;
     
     public static void main(String[] args){
       //Diese Methode wird laut Klassendiagramm verlangt. Damit Java sie als "Main Methode" erkennt, muss diese genau diese Signatur haben (+ static sein). 
+    }
+    
+    
+    public Fabrik()
+    {
+        lager = new Lager();
+        bestellungen = new ArrayList<Bestellung>();
+        bestellungsNr = 0;
     }
    
     public void bestellungAufgeben(int standardTueren, int premiumTueren)
@@ -29,8 +38,18 @@ public class Fabrik
         //erstellen der neuen Bestellung
         Bestellung neueBestellung = new Bestellung(bestellungsNr, standardTueren, premiumTueren); 
         
-        //setzen der Beschaffungszeit auf einen Tag (Relevant für spätere Aufgaben)
-        neueBestellung.setzeBeschaffungsZeit(1440); //in Minuten (1440min = 1 Tag)
+        //berechnen und setzen der Beschaffungszeit auf Bestellung 
+        int beschaffungsZeit = lager.gibBeschaffungszeit(neueBestellung);
+        neueBestellung.setzeBeschaffungsZeit(beschaffungsZeit);    
+        
+        //fülle Lager auf, wenn Bestände niedrig sind (= Beschaffungszeit != 0 -> es hat zu wenig im Lager)
+        if(beschaffungsZeit != 0) {
+            lagerAuffuellen(); 
+        }
+        
+        //berechnen und setzen der Lieferzeit auf Bestellung
+        int lieferzeit = berechneProduktionszeit(neueBestellung) + beschaffungsZeit + 1;
+        neueBestellung.setzeLieferzeit(lieferzeit);
         
         //hinzufügen der Bestellung zur ArrayListe
         bestellungen.add(neueBestellung);        
@@ -60,6 +79,16 @@ public class Fabrik
         
         //Ausgabe des Strings an den User
         System.out.println(resultOutput);
+    }
+    
+    public void lagerAuffuellen()
+    {
+        lager.lagerAuffuellen();
+    }
+    
+    private int berechneProduktionszeit(Bestellung bestellung)
+    {
+        return (bestellung.gibAnzahlStandardTueren() * Standardtuer.PRODUKTIONSZEIT) + (bestellung.gibAnzahlPremiumTueren() * Premiumtuer.PRODUKTIONSZEIT);
     }
     
     private void pruefeParameter(int standardTueren, int premiumTueren) 

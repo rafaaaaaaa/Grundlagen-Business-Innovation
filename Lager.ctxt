@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=Lager
+comment1.params=kundenBestellung
+comment1.target=int\ gibBeschaffungszeit(Bestellung)
+comment2.params=
+comment2.target=void\ lagerAuffuellen()
+comment3.params=
+comment3.target=void\ lagerBestandAusgeben()
+numComments=4

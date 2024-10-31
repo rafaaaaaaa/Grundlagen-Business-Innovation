@@ -8,6 +8,7 @@ public class Bestellung
     private int anzahlStandardTueren;
     private int anzahlPremiumTueren;
     private int bestellungsNr;
+    private float lieferZeit;
     
     public Bestellung(int bestellungsNr, int anzahlStandardTueren, int anzahlPremiumTueren)
     {  
@@ -25,7 +26,8 @@ public class Bestellung
        bestellBestaetigung = true;
     }
     
-    public void bestellungBestaetigen(){
+    public void bestellungBestaetigen()
+    {
         bestellBestaetigung = true;
     }
     
@@ -33,7 +35,7 @@ public class Bestellung
     {
         return bestellBestaetigung;
     }
-    
+        
     public void setzeBeschaffungsZeit(int zeit) 
     {
         //Eine Beschaffungszeit von 0 wäre theoretisch möglich (falls an Lager). Negative Beschaffungszeiten sind unmöglich. Dies wird an den User zurückgespielt über eine Ausgabe. Auf eine Exception wird verzichtet, da das Programm weiterlaufen kann.
@@ -62,7 +64,22 @@ public class Bestellung
     
     public int gibAnzahlPremiumTueren(){
         return anzahlPremiumTueren;
-    }   
+    } 
+    
+    public ArrayList<Produkt> liefereBestellteProdukte() 
+    {
+        return bestellteProdukte;
+    }
+    
+    public void setzeLieferzeit(float lieferZeit)
+    {
+        this.lieferZeit = lieferZeit;
+    }
+    
+    public float gibLieferzeit()
+    {
+        return lieferZeit;
+    }
     
     private <T extends Produkt> void fügeProduktZuBestellung(int anzahl, Class<T> produktTyp) {
         //iterieren durch die Anzahl Produkte die zu erstellen sind. Die Klasse die zu instanzieren ist wird über <T> Produkttyp generisch mitgegeben

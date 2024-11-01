@@ -22,8 +22,8 @@ public class Bestellung
        fügeProduktZuBestellung(anzahlStandardTueren, Standardtuer.class);
        fügeProduktZuBestellung(anzahlStandardTueren, Premiumtuer.class);
        
-       //Nachem alles initialisiert / erstellt wurde, ist die Bestellung offiziell bestätigt -> deswegen am Ende des Konstruktors.
-       bestellBestaetigung = true;
+       //beim erstellen des Objekts ist die Bestellung noch nicht bestätigt.
+       bestellBestaetigung = false;
     }
     
     public void bestellungBestaetigen()

@@ -43,13 +43,21 @@ public class Fabrik
         neueBestellung.setzeBeschaffungsZeit(beschaffungsZeit);    
         
         //fülle Lager auf, wenn Bestände niedrig sind (= Beschaffungszeit != 0 -> es hat zu wenig im Lager)
-        if(beschaffungsZeit != 0) {
+        if(beschaffungsZeit != 0) 
+        {
             lagerAuffuellen(); 
+        }
+        else 
+        {
+            //produziere = ändere Zustand der Produkte von "bestellt" zu "in Produktion".
         }
         
         //berechnen und setzen der Lieferzeit auf Bestellung
         int lieferzeit = berechneProduktionszeit(neueBestellung) + beschaffungsZeit + 1;
         neueBestellung.setzeLieferzeit(lieferzeit);
+        
+        //bestätige die Bestellung, nachdem sie bestellt wurde. //todo -> abklären ob hier richtig?
+        neueBestellung.bestellungBestaetigen();
         
         //hinzufügen der Bestellung zur ArrayListe
         bestellungen.add(neueBestellung);        

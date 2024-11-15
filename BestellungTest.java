@@ -100,15 +100,13 @@ public class BestellungTest {
     /**
      * Test der Fehlerbehandlung (der Exceptions)
      */
-    public void testeFehlerbehandlung() {
-
-        // Optional -> wir haben Exceptions nicht zusammen gesehen
-        
+    public void testeFehlerbehandlung() {       
         
         // Negativwerte
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             new Bestellung(-1, 5, 1); // Standardtür Negativwert
         });
+        
         assert(exception.getMessage().contains("Ungültige Bestellmenge. Kann nicht negativ sein."));
 
         exception = assertThrows(IllegalArgumentException.class, () -> {

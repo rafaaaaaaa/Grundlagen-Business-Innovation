@@ -13,30 +13,24 @@ import org.junit.jupiter.api.Test;
  */
 public class LieferantTest
 {
-    /**
-     * Default constructor for test class LieferantTest
-     */
-    public LieferantTest()
-    {
+     @Test
+    public void testWareBestellenErfolgreich() {
+        Lieferant lieferant = new Lieferant();
+        boolean result = lieferant.wareBestellen(10, 5, 3, 2, 1);
+        assertTrue(result, "Die Bestellung sollte erfolgreich sein, wenn alle Werte >= 0 sind.");
     }
 
-    /**
-     * Sets up the test fixture.
-     *
-     * Called before every test case method.
-     */
-    @BeforeEach
-    public void setUp()
-    {
+    @Test
+    public void testWareBestellenFehlgeschlagenNegativerWert() {
+        Lieferant lieferant = new Lieferant();
+        boolean result = lieferant.wareBestellen(-1, 5, 3, 2, 1);
+        assertFalse(result, "Die Bestellung sollte fehlschlagen, wenn ein Wert negativ ist.");
     }
 
-    /**
-     * Tears down the test fixture.
-     *
-     * Called after every test case method.
-     */
-    @AfterEach
-    public void tearDown()
-    {
+    @Test
+    public void testWareBestellenAlleNull() {
+        Lieferant lieferant = new Lieferant();
+        boolean result = lieferant.wareBestellen(0, 0, 0, 0, 0);
+        assertTrue(result, "Die Bestellung sollte erfolgreich sein, wenn alle Werte 0 sind.");
     }
 }

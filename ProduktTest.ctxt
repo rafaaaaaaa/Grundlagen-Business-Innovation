@@ -1,0 +1,17 @@
+#BlueJ class context
+comment0.target=ProduktTest
+comment0.text=\r\n\ Klasse\ ProduktTest\r\n\r\n\ @author\ Alex\ Marchese\r\n\ @version\ 06.11.2024\r\n
+comment1.params=
+comment1.target=ProduktTest()
+comment1.text=\r\n\ Default\ constructor\ for\ test\ class\ ProduktTest\r\n
+comment2.params=
+comment2.target=void\ setUp()
+comment2.text=\r\n\ Anweisungen\ vor\ jedem\ Testlauf\r\n
+comment3.params=
+comment3.target=void\ tearDown()
+comment3.text=\r\n\ Anweisungen\ nach\ jedem\ Testlauf\r\n
+comment4.params=
+comment4.target=void\ testeProduktGetter()
+comment5.params=
+comment5.target=void\ testeProduktSetter()
+numComments=6

@@ -1,23 +1,37 @@
-public class Lager
+/**
+ * Klasse Lager beinhaltet die Methoden des Lager zur Verwaltung und Auffüllung von Lagerbeständen.
+ * Sie enthält Funktionen zur Berechnung der Beschaffungszeit und zur Überprüfung der Materialverfügbarkeit.
+ * 
+ * @author Rafael Estermann
+ * @version 23.11.2024
+ */
+public class Lager 
 {
     // Maximale Kapazitäten für jede Art von Material
-    private int maxHolzeinheiten = 1000;
-    private int maxSchrauben = 5000;
-    private int maxFarbeinheiten = 1000;
-    private int maxKartoneinheiten = 1000;
-    private int maxGlaseinheiten = 100;
-
+    private static final int MAXHOLZEINHEITEN = 1000;
+    private static final int MAXSCHRAUBEN = 5000;
+    private static final int MAXFARBEINHEITEN = 1000;
+    private static final int MAXKARTONEINHEITEN = 1000;
+    private static final int MAXGLASEINHEITEN = 100;
+    
     // Aktueller Lagerbestand für jede Art von Material
-    private int vorhandeneHolzeinheiten= 0;
-    private int vorhandenSchrauben= 0;
-    private int vorhandeneFarbeinheiten= 0;
-    private int vorhandeneKartoneinheiten= 0;
-    private int vorhandeneGlaseinheiten= 0;
+    private int vorhandeneHolzeinheiten = 0;
+    private int vorhandenSchrauben = 0;
+    private int vorhandeneFarbeinheiten = 0;
+    private int vorhandeneKartoneinheiten = 0;
+    private int vorhandeneGlaseinheiten = 0;
 
-    // Lieferant wird initialisiert
+    // Lieferant wird initialisiert, um die Nachbestellung von Materialien zu ermöglichen
     private Lieferant lieferant = new Lieferant();
 
-    // Berechnet die Beschaffungszeit basierend auf der Kundenbestellung
+    /**
+     * Berechnet die Beschaffungszeit basierend auf der Kundenbestellung.
+     * Falls der aktuelle Lagerbestand ausreichend ist, wird eine Beschaffungszeit von 0 zurückgegeben.
+     * Ansonsten wird eine Beschaffungszeit von 2 Tagen für das Auffüllen angesetzt.
+     * 
+     * @param kundenBestellung Die Bestellung des Kunden, basierend auf welcher der Materialbedarf berechnet wird.
+     * @return Die benötigte Beschaffungszeit in Tagen. 0 bedeutet, dass ausreichend Material im Lager vorhanden ist.
+     */
     public int gibBeschaffungszeit(Bestellung kundenBestellung) {
         int totalHolz = 0;
         int totalSchrauben = 0;
@@ -25,6 +39,7 @@ public class Lager
         int totalKarton = 0;
         int totalGlas = 0;
 
+        // Berechnet den Materialbedarf basierend auf den bestellten Produkten
         for (Produkt produkt : kundenBestellung.liefereBestellteProdukte())
         {
             if (produkt instanceof Standardtuer) 
@@ -60,24 +75,30 @@ public class Lager
         }
     }
 
-    // Füllt den Lagerbestand durch eine Bestellung beim Lieferanten auf
+    /**
+     * Füllt den Lagerbestand durch eine Bestellung beim Lieferanten auf, wenn der Bestand zu niedrig ist.
+     * Bestellt die Differenz zur maximalen Kapazität für jedes Material.
+     * Falls die Lieferung erfolgreich ist, wird der Bestand auf die maximale Kapazität aufgefüllt.
+     */
     public void lagerAuffuellen() 
     {
-        int holzNachbestellen = maxHolzeinheiten - vorhandeneHolzeinheiten;
-        int schraubenNachbestellen = maxSchrauben - vorhandenSchrauben;
-        int farbeNachbestellen = maxFarbeinheiten - vorhandeneFarbeinheiten;
-        int kartonNachbestellen = maxKartoneinheiten - vorhandeneKartoneinheiten;
-        int glasNachbestellen = maxGlaseinheiten - vorhandeneGlaseinheiten;
+        int holzNachbestellen = MAXHOLZEINHEITEN - vorhandeneHolzeinheiten;
+        int schraubenNachbestellen = MAXSCHRAUBEN - vorhandenSchrauben;
+        int farbeNachbestellen = MAXFARBEINHEITEN - vorhandeneFarbeinheiten;
+        int kartonNachbestellen = MAXKARTONEINHEITEN - vorhandeneKartoneinheiten;
+        int glasNachbestellen = MAXGLASEINHEITEN - vorhandeneGlaseinheiten;
 
+        // Bestellt das benötigte Material beim Lieferanten
         boolean lieferungErfolgreich = lieferant.wareBestellen(holzNachbestellen, schraubenNachbestellen, farbeNachbestellen, kartonNachbestellen, glasNachbestellen);
 
+        // Aktualisiert den Lagerbestand auf maximale Kapazität, falls die Lieferung erfolgreich war
         if (lieferungErfolgreich)
         {
-            vorhandeneHolzeinheiten = maxHolzeinheiten;
-            vorhandenSchrauben = maxSchrauben;
-            vorhandeneFarbeinheiten = maxFarbeinheiten;
-            vorhandeneKartoneinheiten = maxKartoneinheiten;
-            vorhandeneGlaseinheiten = maxGlaseinheiten;
+            vorhandeneHolzeinheiten = MAXHOLZEINHEITEN;
+            vorhandenSchrauben = MAXSCHRAUBEN;
+            vorhandeneFarbeinheiten = MAXFARBEINHEITEN;
+            vorhandeneKartoneinheiten = MAXKARTONEINHEITEN;
+            vorhandeneGlaseinheiten = MAXGLASEINHEITEN;
         } 
         else 
         {
@@ -85,7 +106,9 @@ public class Lager
         }
     }
 
-    // Gibt den aktuellen Lagerbestand auf der Konsole aus
+    /**
+     * Gibt den aktuellen Lagerbestand der verschiedenen Materialien auf der Konsole aus.
+     */
     public void lagerBestandAusgeben()
     {
         System.out.println("Lagerbestand:");
@@ -95,4 +118,5 @@ public class Lager
         System.out.println("Kartoneinheiten: " + vorhandeneKartoneinheiten);
         System.out.println("Glaseinheiten: " + vorhandeneGlaseinheiten);
     }
+
 }

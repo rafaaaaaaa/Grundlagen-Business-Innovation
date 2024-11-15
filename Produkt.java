@@ -1,38 +1,46 @@
-public class Produkt
+
+/**
+ * Klasse Produkt ist eine Superklasse für die Klassen Premiumtuer und Standardtuer
+ *
+ * @author Rafael Estermann
+ * @version 23.11.2024
+ */
+public class Produkt 
 {
-    //Wir definierten 4 mögliche Zustände. Initial ist der Zustand immer "bestellt" (1). 
-    //1 = bestellt
-    //2 = in Produktion
-    //3 = versandbereit
-    //4 = versandt
-    private int zustand;
+    /** Variable zustand gibt den Zustand des bestellten Produktes an
+    * Mögliche Zustände: 
+    * 0: Bestellt
+    * 1: In Produktion 
+    * 2: Bereit für Auslieferung 
+    * 3: Ausgeliefert
+    */
+    private int zustand; // default 0, sonst 1, 2, oder 3
 
-    public Produkt()
+    /**
+     * Konstruktor
+     */
+    public Produkt() 
     {
-        zustand = 1;
+         this.zustand = 0; 
     }
 
-    public void zustandAendern(int zustand)
+    /**
+     * Aktueller Zustand des Produkts wird ausgegeben
+     *
+     * @return zustand Zustand des Produkt wird ausgegeben
+     */
+    public int aktuellerZustand() 
     {
-        //Die Logik, wann sich ein Zustand ändert wird grundsätzlich in folgenden Aufgaben implementiert. Momentan sind noch keine Ereignisse laut Aufgabenstellung zu implementieren, welche diesen ändern (Time-Based Änderungen, ...).
-        
-        //Zustände, welche nicht 1, 2, 3 oder 4 sind, sind laut unserer Definition ungültig. Entsprechend wird eine Exception geworfen, der beim Aufrufer gecatched und entsprechend gehandelt werden muss.
-        if(zustand > 4 || zustand < 1)
-        {
-            throw new IllegalArgumentException("Ungültiger Zustand. Zustände sind entweder 1, 2, 3 oder 4");
-        }
-        
-        //Wir haben uns überlegt, dass nur Zustandsänderungen gültig sind, welche höher sind als der momentane Zustand (Intuition: wie kann ein Produkt, dass versandbereit ist wieder in Produktion kommen?)
-        if(this.zustand < zustand)
-        {
-            throw new IllegalArgumentException("Ungültige Zustandsänderung. Der nächste Zustand muss immer größer als der vorherige sein");
-        } 
-        
+        return this.zustand;
+    }
+
+    /**
+     * Zustand des Produkts wird geändert
+     *
+     * @param  zustand : neuer Zustand des Produkt
+     */
+    public void zustandAendern(int zustand) 
+    {
         this.zustand = zustand;
-    }
-    
-    public int aktuelleZustand() 
-    {        
-        return zustand;
     }
 }

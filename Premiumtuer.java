@@ -1,41 +1,90 @@
-public class Premiumtuer extends Produkt
+
+/**
+ * Klasse Premiumtuer beinhaltet die spezifischen Informationen einer Standardtuer
+ *
+ * @author Rafael Estermann
+ * @version 23.11.2024
+ */
+public class Premiumtuer extends Produkt 
 {
-    //Initialisierung der Werte laut Aufgabestellung
+    // Diese Klassenvariablen beschreiben die Einheiten, die für die Herstellung 
+    // jeder Premiumtuer gebraucht werden, deswegen werden sie nicht als Instanzvariablen
+    // sondern als Klassenvariablen deklariert.
     private static final int HOLZEINHEITEN = 4;
     private static final int SCHRAUBEN = 5;
     private static final int GLASEINHEITEN = 5;
     private static final int FARBEINHEITEN = 1;
     private static final int KARTONEINHEITEN = 5;
-    static final int PRODUKTIONSZEIT = 30;
     
-    //Getter-Methoden sind laut Klassendiagramm vorgegeben, machen aber keinen Sinn. Mit Premiumtuer.HOLZEINHEITEN könnte direkt auf die statische Variable zugegriffen werden. Wir entschieden uns trotzdem dafür, da das Musterlösung-Klassendiagramm dies vorgibt.
-    public int gibHolzeinheiten()
+    // Für die Produktion einer Premiumtür werden 30 Minuten gebraucht
+    private static final int PRODUKTIONSZEIT = 30;
+
+    /**
+     * Konstruktor ruft den Konstruktor der Superklasse auf
+     */
+    public Premiumtuer() 
+    {
+        // constructor not needed
+        // super(); //optional
+    }
+
+    /**
+     * Mit dieser Methode wird die benötigte Anzahl Holzeinheiten für die Produktion ausgegeben 
+     * 
+     * @return HOLZEINHEITEN
+     */ 
+    public static int gibHolzeinheiten() 
     {
         return HOLZEINHEITEN;
     }
-    
-    public int gibSchrauben()
+
+    /**
+     * Mit dieser Methode wird die benötigte Anzahl Schrauben für die Produktion ausgegeben 
+     * 
+     * @return SCHRAUBEN
+     */ 
+    public static int gibSchrauben() 
     {
         return SCHRAUBEN;
     }
-    
-    public int gibGlaseinheiten()
+
+    /**
+     * Mit dieser Methode wird die benötigte Anzahl Glaseinheiten für die Produktion ausgegeben 
+     * 
+     * @return GLASEINHEITEN
+     */
+    public static int gibGlaseinheiten() 
     {
         return GLASEINHEITEN;
     }
-    
-    public int gibFarbeinheiten()
+
+    /**
+     * Mit dieser Methode wird die benötigte Anzahl Farbeinheiten für die Produktion ausgegeben 
+     * 
+     * @return FARBEINHEITEN
+     */  
+    public static int gibFarbeinheiten() 
     {
         return FARBEINHEITEN;
     }
-    
-    public int gibKartoneinheiten()
+
+    /**
+     * Mit dieser Methode wird die benötigte Anzahl Kartoneinheiten für die Produktion ausgegeben 
+     * 
+     * @return KARTONEINHEITEN 
+     */
+    public static int gibKartoneinheiten() 
     {
         return KARTONEINHEITEN;
     }
-    
-    public int gibProduktionszeit()
+
+    /**
+     * Mit dieser Methode wird die benötigte Produktionszeit ausgegeben
+     * 
+     * @return PRODUKTIONSZEIT
+     */ 
+    public static int gibProduktionszeit() 
     {
         return PRODUKTIONSZEIT;
-    }   
+    }
 }

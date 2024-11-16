@@ -42,23 +42,27 @@ public class Bestellung
      */
     public Bestellung(int anzahlStandardTueren, int anzahlPremiumTueren, int bestellungsNr) 
     {
+       // initialise instance variables
         this.bestellungsNr = bestellungsNr;
-        this.beschaffungsZeit = -1; // Standardwert für Beschaffungszeit
+        this.beschaffungsZeit = -1;
         this.bestellteProdukte = new ArrayList<Produkt>();
-        this.bestellBestaetigung = false; // Bestätigung ist anfänglich false
+        this.bestellBestaetigung = false; // this is optional
 
-        // Validierung der Bestellmenge
         if (anzahlStandardTueren < 0 || anzahlPremiumTueren < 0) {
             throw new IllegalArgumentException("Ungültige Bestellmenge. Kann nicht negativ sein.");
+            // System.out.println("Ungültige Bestellmenge. Kann nicht negativ sein.");
         } else if (anzahlStandardTueren == 0 && anzahlPremiumTueren == 0) {
             throw new IllegalArgumentException("Die Bestellung muss mindestens ein Produkt enthalten.");
+            // System.out.println("Die Bestellung muss mindestens ein Produkt enthalten.");
         } else if (anzahlStandardTueren > 10_000 || anzahlPremiumTueren > 10_000) {
-            throw new IllegalArgumentException("Bestellmenge ist zu groß. Maximal 10 Tausend pro Artikel.");
+            throw new IllegalArgumentException("Bestellmenge ist zu gross. Maximal 10 Tausend pro Artikel.");
+            // System.out.println("Bestellmenge ist zu gross. Maximal 10 Tausend pro Artikel.");
         } else {
             this.anzahlStandardTueren = anzahlStandardTueren;
             this.anzahlPremiumTueren = anzahlPremiumTueren;
             fuelleBestellteprodukte(anzahlStandardTueren, anzahlPremiumTueren);
         }
+
     }
 
     /**

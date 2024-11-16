@@ -52,7 +52,7 @@ public class Fabrik
             bestellungsNr = bestellungsNr + 1;  
         
             // Erstellt eine neue Bestellung mit der aktuellen Bestellnummer und Türmengen
-            Bestellung neueBestellung = new Bestellung(bestellungsNr, standardTueren, premiumTueren); 
+            Bestellung neueBestellung = new Bestellung(standardTueren, premiumTueren, bestellungsNr); 
             
             // Berechnet und setzt die Beschaffungszeit für die Bestellung basierend auf dem Lagerbestand
             int beschaffungsZeit = lager.gibBeschaffungszeit(neueBestellung);

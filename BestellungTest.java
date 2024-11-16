@@ -78,6 +78,24 @@ public class BestellungTest {
                 "Test Methode bestellungBestaetigen erfolgreich.");
 
     }
+    
+       @Test
+    /**
+     * Testet bestellungBestaetigen()
+     */
+    public void testeSetzeLieferzeit() {
+
+        // Instanzierung einer Bestellung
+        Bestellung testBestellung = new Bestellung(5, 7, 2);
+
+        assertEquals(testBestellung.gibLieferzeit(), 0);
+        testBestellung.setzeLieferzeit(3);
+        assertEquals(testBestellung.gibLieferzeit(), 3);
+
+        System.out.println(
+                "Test Methode bestellungBestaetigen erfolgreich.");
+
+    }
 
     @Test
     /**

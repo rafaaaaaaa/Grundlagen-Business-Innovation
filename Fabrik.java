@@ -66,7 +66,7 @@ public class Fabrik
             else 
             {
                 // Produziert, indem der Zustand der Produkte von "bestellt" zu "in Produktion" geändert wird
-                // wird in kommenden Aufgaben implementiert. Produkt Zustand kann sich dann auch ändern. 
+                // wird in kommenden Aufgaben implementiert. Produkt Zustand kann sich dann auch ändern. Ebenfalls wird das vorhandene Lager kleiner
             }
         
             // Berechnet und setzt die gesamte Lieferzeit der Bestellung

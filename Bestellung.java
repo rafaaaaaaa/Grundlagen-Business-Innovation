@@ -47,7 +47,7 @@ public class Bestellung
         this.beschaffungsZeit = -1;
         this.bestellteProdukte = new ArrayList<Produkt>();
         this.bestellBestaetigung = false; // this is optional
-        this.lieferZeit = 0;
+        this.lieferZeit = 1; //Standart Lieferzeit
         
         if (anzahlStandardTueren < 0 || anzahlPremiumTueren < 0) {
             throw new IllegalArgumentException("Ungültige Bestellmenge. Kann nicht negativ sein.");

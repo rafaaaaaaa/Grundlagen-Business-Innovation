@@ -88,7 +88,7 @@ public class BestellungTest {
         // Instanzierung einer Bestellung
         Bestellung testBestellung = new Bestellung(5, 7, 2);
 
-        assertEquals(testBestellung.gibLieferzeit(), 0);
+        assertEquals(testBestellung.gibLieferzeit(), 1);
         testBestellung.setzeLieferzeit(3);
         assertEquals(testBestellung.gibLieferzeit(), 3);
 

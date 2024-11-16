@@ -104,7 +104,7 @@ public class Lager
         {
             System.out.println("Lieferung fehlgeschlagen!");
         }
-    }
+    }  
 
     /**
      * Gibt den aktuellen Lagerbestand der verschiedenen Materialien auf der Konsole aus.

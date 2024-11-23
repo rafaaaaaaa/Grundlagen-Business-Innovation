@@ -8,7 +8,7 @@
 public class Lager 
 {
     // Maximale Kapazitäten für jede Art von Material
-    private static final int MAXHOLZEINHEITEN = 1000;
+    private static final int MAXHOLZEINHEITEN = 10000;
     private static final int MAXSCHRAUBEN = 5000;
     private static final int MAXFARBEINHEITEN = 1000;
     private static final int MAXKARTONEINHEITEN = 1000;

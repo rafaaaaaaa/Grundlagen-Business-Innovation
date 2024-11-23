@@ -1,13 +1,13 @@
 #BlueJ class context
 comment0.target=Lager
-comment0.text=\r\n\ Klasse\ Lager\ beinhaltet\ die\ Methoden\ des\ Lager\ zur\ Verwaltung\ und\ Auff\u00FCllung\ von\ Lagerbest\u00E4nden.\r\n\ Sie\ enth\u00E4lt\ Funktionen\ zur\ Berechnung\ der\ Beschaffungszeit\ und\ zur\ \u00DCberpr\u00FCfung\ der\ Materialverf\u00FCgbarkeit.\r\n\ \r\n\ @author\ Rafael\ Estermann\r\n\ @version\ 23.11.2024\r\n
+comment0.text=\n\ Klasse\ Lager\ beinhaltet\ die\ Methoden\ des\ Lager\ zur\ Verwaltung\ und\ Auff\u00FCllung\ von\ Lagerbest\u00E4nden.\n\ Sie\ enth\u00E4lt\ Funktionen\ zur\ Berechnung\ der\ Beschaffungszeit\ und\ zur\ \u00DCberpr\u00FCfung\ der\ Materialverf\u00FCgbarkeit.\n\ \n\ @author\ Rafael\ Estermann\n\ @version\ 23.11.2024\n
 comment1.params=kundenBestellung
 comment1.target=int\ gibBeschaffungszeit(Bestellung)
-comment1.text=\r\n\ Berechnet\ die\ Beschaffungszeit\ basierend\ auf\ der\ Kundenbestellung.\r\n\ Falls\ der\ aktuelle\ Lagerbestand\ ausreichend\ ist,\ wird\ eine\ Beschaffungszeit\ von\ 0\ zur\u00FCckgegeben.\r\n\ Ansonsten\ wird\ eine\ Beschaffungszeit\ von\ 2\ Tagen\ f\u00FCr\ das\ Auff\u00FCllen\ angesetzt.\r\n\ \r\n\ @param\ kundenBestellung\ Die\ Bestellung\ des\ Kunden,\ basierend\ auf\ welcher\ der\ Materialbedarf\ berechnet\ wird.\r\n\ @return\ Die\ ben\u00F6tigte\ Beschaffungszeit\ in\ Tagen.\ 0\ bedeutet,\ dass\ ausreichend\ Material\ im\ Lager\ vorhanden\ ist.\r\n
+comment1.text=\n\ Berechnet\ die\ Beschaffungszeit\ basierend\ auf\ der\ Kundenbestellung.\n\ Falls\ der\ aktuelle\ Lagerbestand\ ausreichend\ ist,\ wird\ eine\ Beschaffungszeit\ von\ 0\ zur\u00FCckgegeben.\n\ Ansonsten\ wird\ eine\ Beschaffungszeit\ von\ 2\ Tagen\ f\u00FCr\ das\ Auff\u00FCllen\ angesetzt.\n\ \n\ @param\ kundenBestellung\ Die\ Bestellung\ des\ Kunden,\ basierend\ auf\ welcher\ der\ Materialbedarf\ berechnet\ wird.\n\ @return\ Die\ ben\u00F6tigte\ Beschaffungszeit\ in\ Tagen.\ 0\ bedeutet,\ dass\ ausreichend\ Material\ im\ Lager\ vorhanden\ ist.\n
 comment2.params=
 comment2.target=void\ lagerAuffuellen()
-comment2.text=\r\n\ F\u00FCllt\ den\ Lagerbestand\ durch\ eine\ Bestellung\ beim\ Lieferanten\ auf,\ wenn\ der\ Bestand\ zu\ niedrig\ ist.\r\n\ Bestellt\ die\ Differenz\ zur\ maximalen\ Kapazit\u00E4t\ f\u00FCr\ jedes\ Material.\r\n\ Falls\ die\ Lieferung\ erfolgreich\ ist,\ wird\ der\ Bestand\ auf\ die\ maximale\ Kapazit\u00E4t\ aufgef\u00FCllt.\r\n
+comment2.text=\n\ F\u00FCllt\ den\ Lagerbestand\ durch\ eine\ Bestellung\ beim\ Lieferanten\ auf,\ wenn\ der\ Bestand\ zu\ niedrig\ ist.\n\ Bestellt\ die\ Differenz\ zur\ maximalen\ Kapazit\u00E4t\ f\u00FCr\ jedes\ Material.\n\ Falls\ die\ Lieferung\ erfolgreich\ ist,\ wird\ der\ Bestand\ auf\ die\ maximale\ Kapazit\u00E4t\ aufgef\u00FCllt.\n
 comment3.params=
 comment3.target=void\ lagerBestandAusgeben()
-comment3.text=\r\n\ Gibt\ den\ aktuellen\ Lagerbestand\ der\ verschiedenen\ Materialien\ auf\ der\ Konsole\ aus.\r\n
+comment3.text=\n\ Gibt\ den\ aktuellen\ Lagerbestand\ der\ verschiedenen\ Materialien\ auf\ der\ Konsole\ aus.\n
 numComments=4

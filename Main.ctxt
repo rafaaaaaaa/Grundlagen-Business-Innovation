@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Main
-comment0.text=\r\n\ Die\ Klasse\ Main\ ist\ die\ Hauptklasse\ des\ Programms.\r\n\ Hier\ befindet\ sich\ die\ main\ Methode\ zum\ Starten\ des\ Programms.\r\n\r\n\ @author\ Rafael\ Estermann\r\n\ @version\ 23.11.2024\r\n
+comment0.text=\n\ Die\ Klasse\ Main\ ist\ die\ Hauptklasse\ des\ Programms.\n\ Hier\ befindet\ sich\ die\ main\ Methode\ zum\ Starten\ des\ Programms.\n\n\ @author\ Rafael\ Estermann\n\ @version\ 23.11.2024\n
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
 numComments=2

@@ -20,7 +20,7 @@ public class Lieferant
         boolean bestellungErfolgreich = true;
         // Beispielhafte Logik: Die Bestellung ist erfolgreich, wenn alle Einheiten größer oder gleich null sind
         // In einer echten Anwendung könnten hier weitere Überprüfungen erfolgen, wie z.B. Lagerbestände des Lieferanten prüfen
-        if (holzEinheiten < 0 || schraubenEinheiten < 0 || farbEinheiten < 0 || kartonEinheiten < 0 || glasEinheiten < 0) {
+        if (holzEinheiten <= 0 || schraubenEinheiten <= 0 || farbEinheiten <= 0 || kartonEinheiten <= 0 || glasEinheiten <= 0) {
             System.out.println("Bestellung fehlgeschlagen: Ungültige Bestellmengen.");
             return false;
         }

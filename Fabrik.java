@@ -39,6 +39,11 @@ public class Fabrik
      */
     public void bestellungAufgeben(int standardTueren, int premiumTueren) 
     {
+        //Prüfung, ob Lagerbestand "niedrig" (= min. 1 Material weniger als 20%) ist
+        if(lager.istUnterMinimalbestand()) {
+           lager.lagerAuffuellen();
+        }
+        
         // Überprüft auf gültige Bestellmengen
         if (standardTueren < 0 || premiumTueren < 0) { 
             System.out.println("\nUngültige Bestellmenge. Kann nicht negativ sein.");
@@ -58,16 +63,15 @@ public class Fabrik
             int beschaffungsZeit = lager.gibBeschaffungszeit(neueBestellung);
             neueBestellung.setzeBeschaffungsZeit(beschaffungsZeit);    
         
-            // Füllt das Lager auf, wenn die Bestände niedrig sind (d.h., Beschaffungszeit ist nicht null)
-            if(beschaffungsZeit != 0) 
-            {
-                lager.lagerAuffuellen();
-            }
-            else 
+            if(beschaffungsZeit == 0)
             {
                 // Produziert, indem der Zustand der Produkte von "bestellt" zu "in Produktion" geändert wird
-                // wird in kommenden Aufgaben implementiert. Produkt Zustand kann sich dann auch ändern. Ebenfalls wird das vorhandene Lager kleiner
-            }
+                // wird in kommenden Aufgaben implementiert. Produkt Zustand kann sich dann auch ändern. Ebenfalls wird das vorhandene Lager kleiner       
+            } 
+            else
+            {
+                // hier müsste man mit einem Thread Sleep oder so arbeiten (2 Tage) bevor produziert werden kann.     
+            } 
         
             // Berechnet und setzt die gesamte Lieferzeit der Bestellung
             int lieferzeit = berechneProduktionszeit(neueBestellung) + beschaffungsZeit + 1;

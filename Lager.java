@@ -8,7 +8,7 @@
 public class Lager 
 {
     // Maximale Kapazitäten für jede Art von Material
-    private static final int MAXHOLZEINHEITEN = 10000;
+    private static final int MAXHOLZEINHEITEN = 1000;
     private static final int MAXSCHRAUBEN = 5000;
     private static final int MAXFARBEINHEITEN = 1000;
     private static final int MAXKARTONEINHEITEN = 1000;
@@ -30,7 +30,7 @@ public class Lager
      * Ansonsten wird eine Beschaffungszeit von 2 Tagen für das Auffüllen angesetzt.
      * 
      * @param kundenBestellung Die Bestellung des Kunden, basierend auf welcher der Materialbedarf berechnet wird.
-     * @return Die benötigte Beschaffungszeit in Tagen. 0 bedeutet, dass ausreichend Material im Lager vorhanden ist.
+     * @return Die benötigte Beschaffungszeit in Tagen. 0 bedeutet, dass ausreichend Material im Lager vorhanden ist. 2 bedeutet, dass nicht genügend Material vorhanden ist.
      */
     public int gibBeschaffungszeit(Bestellung kundenBestellung) {
         int totalHolz = 0;
@@ -117,6 +117,77 @@ public class Lager
         System.out.println("Farbeinheiten: " + vorhandeneFarbeinheiten);
         System.out.println("Kartoneinheiten: " + vorhandeneKartoneinheiten);
         System.out.println("Glaseinheiten: " + vorhandeneGlaseinheiten);
+    }   
+    
+    /**
+     * Überprüft, ob der momentane Lagerbestand einer beliebigen Materialart unter 20 % des maximalen Bestands liegt.
+     * 
+     * @return true, wenn eine oder mehrere Materialarten unter 20 % des maximalen Bestands liegen, sonst false.
+     */
+    public boolean istUnterMinimalbestand() {
+        // Berechnet den Minimalbestand für jede Materialart
+        int minimalHolzeinheiten = MAXHOLZEINHEITEN / 5; // 20 %
+        int minimalSchrauben = MAXSCHRAUBEN / 5;
+        int minimalFarbeinheiten = MAXFARBEINHEITEN / 5;
+        int minimalKartoneinheiten = MAXKARTONEINHEITEN / 5;
+        int minimalGlaseinheiten = MAXGLASEINHEITEN / 5;
+
+        // Überprüft, ob eine Materialart unter den Minimalbestand gefallen ist
+        return (vorhandeneHolzeinheiten < minimalHolzeinheiten ||
+                vorhandenSchrauben < minimalSchrauben ||
+                vorhandeneFarbeinheiten < minimalFarbeinheiten ||
+                vorhandeneKartoneinheiten < minimalKartoneinheiten ||
+                vorhandeneGlaseinheiten < minimalGlaseinheiten);
+    }
+    
+        // Getter-Methoden für die MAX-Variablen
+    /**
+     * Mit dieser Methode wird die maximale Anzahl Holzeinheiten ausgegeben.
+     * 
+     * @return MAXHOLZEINHEITEN
+     */
+    public static int gibMaxHolzeinheiten() 
+    {
+        return MAXHOLZEINHEITEN;
     }
 
-}
+    /**
+     * Mit dieser Methode wird die maximale Anzahl Schrauben ausgegeben.
+     * 
+     * @return MAXSCHRAUBEN
+     */
+    public static int gibMaxSchrauben() 
+    {
+        return MAXSCHRAUBEN;
+    }
+
+    /**
+     * Mit dieser Methode wird die maximale Anzahl Farbeinheiten ausgegeben.
+     * 
+     * @return MAXFARBEINHEITEN
+     */
+    public static int gibMaxFarbeinheiten() 
+    {
+        return MAXFARBEINHEITEN;
+    }
+
+    /**
+     * Mit dieser Methode wird die maximale Anzahl Kartoneinheiten ausgegeben.
+     * 
+     * @return MAXKARTONEINHEITEN
+     */
+    public static int gibMaxKartoneinheiten() 
+    {
+        return MAXKARTONEINHEITEN;
+    }
+
+    /**
+     * Mit dieser Methode wird die maximale Anzahl Glaseinheiten ausgegeben.
+     * 
+     * @return MAXGLASEINHEITEN
+     */
+    public static int gibMaxGlaseinheiten() 
+    {
+        return MAXGLASEINHEITEN;
+    }
+   }

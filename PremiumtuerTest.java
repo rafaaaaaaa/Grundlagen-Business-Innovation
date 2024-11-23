@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 /**
  * Klasse PremiumtuerTest
  *
- * @author Alex Marchese
- * @version 06.11.2024
+ * @author Rafael Esterman
+ * @version 23.11.2024
  */
 public class PremiumtuerTest {
     String nameTestClasse = "PremiumtuerTest"; // Name der Testklasse

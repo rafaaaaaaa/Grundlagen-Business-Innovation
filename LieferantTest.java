@@ -1,5 +1,3 @@
-
-
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,8 +6,8 @@ import org.junit.jupiter.api.Test;
 /**
  * The test class LieferantTest.
  *
- * @author  (your name)
- * @version (a version number or a date)
+ * @author  Rafael Estermann
+ * @version 23.11.2024
  */
 public class LieferantTest
 {
@@ -31,6 +29,6 @@ public class LieferantTest
     public void testWareBestellenAlleNull() {
         Lieferant lieferant = new Lieferant();
         boolean result = lieferant.wareBestellen(0, 0, 0, 0, 0);
-        assertTrue(result, "Die Bestellung sollte erfolgreich sein, wenn alle Werte 0 sind.");
+        assertFalse(result, "Die Bestellung sollte erfolgreich sein, wenn alle Werte 0 sind.");
     }
 }

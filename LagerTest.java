@@ -127,6 +127,45 @@ public class LagerTest
         assertTrue(outContent.toString().trim().contains(expectedOutputTwo), "Actual Output ist nicht Erwarteten Output enthalten");
     }
     
+    @Test
+    /**
+     * Testet die Getters für die maximalen Einheiten
+     */
+    public void testeMaxEinheitenGetters() {
+        assertEquals(Lager.gibMaxFarbeinheiten(), 1000);
+        assertEquals(Lager.gibMaxGlaseinheiten(), 100);
+        assertEquals(Lager.gibMaxHolzeinheiten(), 1000);
+        assertEquals(Lager.gibMaxKartoneinheiten(), 1000);
+        assertEquals(Lager.gibMaxSchrauben(), 5000);
+
+        System.out.println("Getters von Max Einheiten des Lagers erfolgreich");
+    }
+
+     @Test
+    /**
+     * Testet ob MinimalBestand Boolean korrekterweise True zurückgibt, bei leerem Lager
+     */
+    public void testeIstUnterMinimalbestandWennLagerLeer() {   
+        
+        // Überprüfen, ob die istUnterMinimalbestand Methode "True" zurückgibt -> da Lager komplett leer (= <30%)
+        assertTrue(testee.istUnterMinimalbestand(), "Actual Output ist nicht Erwarteten Output enthalten");
+ 
+    }
+    
+    @Test
+    /**
+     * Testet ob MinimalBestand Boolean korrekterweise True zurückgibt, bei leerem Lager
+     */
+    public void testeIstNichtUnterMinimalbestandWennLagerLeer() {   
+        
+        //Auffüllen des Lagers -> sodass nicht unter minimal Bestand.
+        testee.lagerAuffuellen();
+        
+        // Überprüfen, ob die istUnterMinimalbestand Methode "True" zurückgibt -> da Lager komplett leer (= <30%)
+        assertFalse(testee.istUnterMinimalbestand(), "Actual Output ist nicht Erwarteten Output enthalten");
+ 
+    }
+    
     private String getFullKapazitaetString(){
         return String.join(System.lineSeparator(),
             "Lagerbestand:",

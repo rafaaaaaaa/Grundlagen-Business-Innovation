@@ -99,6 +99,8 @@ public class Lager
             vorhandeneFarbeinheiten = MAXFARBEINHEITEN;
             vorhandeneKartoneinheiten = MAXKARTONEINHEITEN;
             vorhandeneGlaseinheiten = MAXGLASEINHEITEN;
+            
+            System.out.println("Lieferung erfolgreich!");
         } 
         else 
         {

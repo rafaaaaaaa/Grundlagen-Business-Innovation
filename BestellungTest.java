@@ -55,6 +55,7 @@ public class BestellungTest {
         // Testen von automatisch initialisierten Werten
         assertEquals(testBestellung.gibBestellBestaetigung(), false);
         assertEquals(testBestellung.gibBeschaffungsZeit(), -1);
+        assertEquals(testBestellung.gibLieferzeit(), 1);
 
         System.out.println(
                 "Test Bestellung mit Variableneingabe erfolgreich. Initialisierung mit Selbstdefinierten Variablen und Standardwerten funktioniert.");
@@ -92,8 +93,22 @@ public class BestellungTest {
         testBestellung.setzeLieferzeit(3);
         assertEquals(testBestellung.gibLieferzeit(), 3);
 
-        System.out.println(
-                "Test Methode bestellungBestaetigen erfolgreich.");
+        System.out.println("Test Methode bestellungBestaetigen erfolgreich.");
+
+    }
+    
+    @Test
+    /**
+     * Testet liefereBestellteProdukte()
+     */
+    public void testeLiefereBestellteProdukte() {
+
+        // Instanzierung einer Bestellung mit insgesamt 10 Produkten
+        Bestellung testBestellung = new Bestellung(5, 5, 2);
+
+        assertEquals(testBestellung.liefereBestellteProdukte().size(), 10);
+
+        System.out.println("Test Methode LiefereBestellteProdukte erfolgreich.");
 
     }
 

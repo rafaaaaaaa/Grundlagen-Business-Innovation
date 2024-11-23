@@ -44,7 +44,7 @@ public class Bestellung
     {
        // initialise instance variables
         this.bestellungsNr = bestellungsNr;
-        this.beschaffungsZeit = -1;
+        this.beschaffungsZeit = -1; //Standart geht man von genügend Bestand aus.
         this.bestellteProdukte = new ArrayList<Produkt>();
         this.bestellBestaetigung = false; // this is optional
         this.lieferZeit = 1; //Standart Lieferzeit

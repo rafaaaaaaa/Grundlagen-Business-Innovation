@@ -169,11 +169,11 @@ public class LagerTest
     private String getFullKapazitaetString(){
         return String.join(System.lineSeparator(),
             "Lagerbestand:",
-            "Holzeinheiten: 1000",
-            "Schrauben: 5000",
-            "Farbeinheiten: 1000",
-            "Kartoneinheiten: 1000",
-            "Glaseinheiten: 100");        
+            "Holzeinheiten: " + Lager.gibMaxHolzeinheiten(),
+            "Schrauben: " + Lager.gibMaxSchrauben(),
+            "Farbeinheiten: "+ Lager.gibMaxFarbeinheiten(),
+            "Kartoneinheiten: " + Lager.gibMaxKartoneinheiten(),
+            "Glaseinheiten: " + Lager.gibMaxGlaseinheiten());       
     }
     
     private String getEmptyKapazitaetString(){

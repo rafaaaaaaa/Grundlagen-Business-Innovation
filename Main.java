@@ -14,8 +14,7 @@ public class Main
 
         Fabrik testFabrik = new Fabrik();
               
-        System.out.println("Willkommen bei der AEKI Fabrik.");        
-        
+        System.out.println("Willkommen bei der AEKI Fabrik.");     
 
         // Best 1: 2, 2
         testFabrik.bestellungAufgeben(2, 2);

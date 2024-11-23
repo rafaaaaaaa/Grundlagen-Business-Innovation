@@ -62,17 +62,10 @@ public class Fabrik
             // Berechnet und setzt die Beschaffungszeit für die Bestellung basierend auf dem Lagerbestand
             int beschaffungsZeit = lager.gibBeschaffungszeit(neueBestellung);
             neueBestellung.setzeBeschaffungsZeit(beschaffungsZeit);    
-        
-            if(beschaffungsZeit == 0)
-            {
-                // Produziert, indem der Zustand der Produkte von "bestellt" zu "in Produktion" geändert wird
-                // wird in kommenden Aufgaben implementiert. Produkt Zustand kann sich dann auch ändern. Ebenfalls wird das vorhandene Lager kleiner       
-            } 
-            else
-            {
-                // hier müsste man mit einem Thread Sleep oder so arbeiten (2 Tage) bevor produziert werden kann.     
-            } 
-        
+            
+            if(beschaffungsZeit == 2)  {
+              lagerAuffuellen();  //wenn mehr als 20% vorhanden sind im Lager, aber die Bestellung trotzdem mehr Material erfordert, wird ebenfalls nachbestellt. 
+            }
             // Berechnet und setzt die gesamte Lieferzeit der Bestellung
             int lieferzeit = berechneProduktionszeit(neueBestellung) + beschaffungsZeit + 1;
             neueBestellung.setzeLieferzeit(lieferzeit);

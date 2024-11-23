@@ -16,6 +16,7 @@ public class Main
               
         System.out.println("Willkommen bei der AEKI Fabrik.");     
 
+        //Hier könnte in zukünftiger Aufgabe ein Batchjob auf einem eigenen Thread laufen, welcher die Bestellungen nach und nach Produziert.
         // Best 1: 2, 2
         testFabrik.bestellungAufgeben(2, 2);
         testFabrik.bestellungAusgeben();

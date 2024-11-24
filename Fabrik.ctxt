@@ -21,4 +21,5 @@ comment6.target=float\ berechneProduktionszeit(Bestellung)
 comment6.text=\r\n\ Berechnet\ die\ Produktionszeit\ f\u00FCr\ eine\ gegebene\ Bestellung,\ basierend\ auf\ der\ Anzahl\ der\ Standard-\r\n\ und\ Premiumt\u00FCren\ und\ deren\ jeweiliger\ Produktionszeit.\r\n\ \r\n\ @param\ bestellung\ Die\ Bestellung,\ f\u00FCr\ die\ die\ Produktionszeit\ berechnet\ wird.\r\n\ @return\ anzahlTageProduktionszeit\ Die\ gesamte\ Produktionszeit\ in\ Tagen.\r\n
 comment7.params=bestellung
 comment7.target=void\ bestellungBestaetigen(Bestellung)
+comment7.text=\r\n\ Best\u00E4tigt\ die\ Bestellung\ und\ gibt\ die\ Bestellbest\u00E4tigung\ aus\r\n\ \r\n\ @param\ bestellung\ Die\ Bestellung,\ die\ best\u00E4tigt\ werden\ muss\r\n
 numComments=8

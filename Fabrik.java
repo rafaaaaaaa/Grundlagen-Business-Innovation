@@ -129,6 +129,11 @@ public class Fabrik
         return anzahlTageProduktionszeit;
     }
     
+    /**
+     * Bestätigt die Bestellung und gibt die Bestellbestätigung aus
+     * 
+     * @param bestellung Die Bestellung, die bestätigt werden muss
+        */
     private void bestellungBestaetigen(Bestellung bestellung) {
         bestellung.bestellungBestaetigen();
         System.out.println("\nBestellung " + bestellung.gibBestellungsNr() + " bestätigt. Die Lieferzeit beträgt " + bestellung.gibLieferzeit() + " Tage");

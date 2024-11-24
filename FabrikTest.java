@@ -91,7 +91,7 @@ public class FabrikTest {
                 
         int expectedBeschaffungszeit = 2;
         int expectedStandardLieferzeit = 1;
-        int expectedProduktionszeit = 10000 * Standardtuer.gibProduktionszeit() + 10000 * Premiumtuer.gibProduktionszeit();
+        int expectedProduktionszeit = (10000 * Standardtuer.gibProduktionszeit() + 10000 * Premiumtuer.gibProduktionszeit()) / 1440;
         int expectedLieferzeit = expectedProduktionszeit + expectedStandardLieferzeit + expectedBeschaffungszeit;
 
         assertEquals(testFabrik.gibBestellungen().get(0).gibBeschaffungsZeit(), expectedBeschaffungszeit);
@@ -113,7 +113,7 @@ public class FabrikTest {
                 
         int expectedBeschaffungszeit = 0;
         int expectedStandardLieferzeit = 1;
-        int expectedProduktionszeit = 1 * Standardtuer.gibProduktionszeit() + 1 * Premiumtuer.gibProduktionszeit();
+        int expectedProduktionszeit = (1 * Standardtuer.gibProduktionszeit() + 1 * Premiumtuer.gibProduktionszeit()) / 1440;
         int expectedLieferzeit = expectedProduktionszeit + expectedStandardLieferzeit + expectedBeschaffungszeit;
 
         assertEquals(testFabrik.gibBestellungen().get(0).gibBeschaffungsZeit(), expectedBeschaffungszeit);

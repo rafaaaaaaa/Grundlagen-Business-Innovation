@@ -69,12 +69,12 @@ public class Fabrik
             // Berechnet und setzt die gesamte Lieferzeit der Bestellung
             int lieferzeit = berechneProduktionszeit(neueBestellung) + beschaffungsZeit + 1;
             neueBestellung.setzeLieferzeit(lieferzeit);
-        
-            // Bestätigt die Bestellung
-            neueBestellung.bestellungBestaetigen();
-            
+             
             // Fügt die neue Bestellung zur Liste der Bestellungen hinzu
-            bestellungen.add(neueBestellung);    
+            bestellungen.add(neueBestellung);   
+            
+            // Bestätigt die Bestellung
+            bestellungBestaetigen(neueBestellung);
         }
     }
     
@@ -116,11 +116,19 @@ public class Fabrik
      * und Premiumtüren und deren jeweiliger Produktionszeit.
      * 
      * @param bestellung Die Bestellung, für die die Produktionszeit berechnet wird.
-     * @return Die gesamte Produktionszeit in Tagen.
+     * @return anzahlTageProduktionszeit Die gesamte Produktionszeit in Tagen.
      */
     private int berechneProduktionszeit(Bestellung bestellung)
     {
-        return (bestellung.gibAnzahlStandardTueren() * Standardtuer.gibProduktionszeit()) 
+        int anzahlMinutenProduktionsZeit = (bestellung.gibAnzahlStandardTueren() * Standardtuer.gibProduktionszeit()) 
                 + (bestellung.gibAnzahlPremiumTueren() * Premiumtuer.gibProduktionszeit());
+                
+        int anzahlTageProduktionszeit = anzahlMinutenProduktionsZeit / 1440;      
+        return anzahlTageProduktionszeit;
+    }
+    
+    private void bestellungBestaetigen(Bestellung bestellung) {
+        bestellung.bestellungBestaetigen();
+        System.out.println("Bestellung " + bestellung.gibBestellungsNr() + " bestätigt. Die Lieferzeit beträgt " + bestellung.gibLieferzeit() + "Tage");
     }
 }

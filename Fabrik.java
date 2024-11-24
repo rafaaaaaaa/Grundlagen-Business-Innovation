@@ -41,6 +41,7 @@ public class Fabrik
     {
         //Prüfung, ob Lagerbestand "niedrig" (= min. 1 Material weniger als 20%) ist
         if(lager.istUnterMinimalbestand()) {
+           //Falls unter minimal Bestand, wird das Lager wieder komplett aufgefüllt
            lager.lagerAuffuellen();
         }
         
@@ -64,10 +65,11 @@ public class Fabrik
             neueBestellung.setzeBeschaffungsZeit(beschaffungsZeit);    
             
             if(beschaffungsZeit == 2)  {
-              lagerAuffuellen();  //wenn mehr als 20% vorhanden sind im Lager, aber die Bestellung trotzdem mehr Material erfordert, wird ebenfalls nachbestellt. 
+              lagerAuffuellen();  //wenn mehr als 20% von allen Materialien vorhanden sind im Lager (siehe Prüfung am Anfang der Methode), aber die Bestellung trotzdem mehr Material erfordert, wird ebenfalls nachbestellt. 
             }
+            
             // Berechnet und setzt die gesamte Lieferzeit der Bestellung
-            int lieferzeit = berechneProduktionszeit(neueBestellung) + beschaffungsZeit + 1;
+            float lieferzeit = berechneProduktionszeit(neueBestellung) + beschaffungsZeit + 1;
             neueBestellung.setzeLieferzeit(lieferzeit);
              
             // Fügt die neue Bestellung zur Liste der Bestellungen hinzu
@@ -97,6 +99,7 @@ public class Fabrik
                     + " Standardtüren: " + bestellung.gibAnzahlStandardTueren()
                     + " Premiumtüren: " + bestellung.gibAnzahlPremiumTueren()
                     + " Beschaffungszeit: " + bestellung.gibBeschaffungsZeit()
+                    + " Lieferzeit: " + bestellung.gibLieferzeit()
                     + " Bestellbestätigung: " + bestellung.gibBestellBestaetigung());
         }
     }
@@ -118,17 +121,16 @@ public class Fabrik
      * @param bestellung Die Bestellung, für die die Produktionszeit berechnet wird.
      * @return anzahlTageProduktionszeit Die gesamte Produktionszeit in Tagen.
      */
-    private int berechneProduktionszeit(Bestellung bestellung)
+    private float berechneProduktionszeit(Bestellung bestellung)
     {
         int anzahlMinutenProduktionsZeit = (bestellung.gibAnzahlStandardTueren() * Standardtuer.gibProduktionszeit()) 
-                + (bestellung.gibAnzahlPremiumTueren() * Premiumtuer.gibProduktionszeit());
-                
-        int anzahlTageProduktionszeit = anzahlMinutenProduktionsZeit / 1440;      
+                + (bestellung.gibAnzahlPremiumTueren() * Premiumtuer.gibProduktionszeit());     
+        float anzahlTageProduktionszeit = (float)anzahlMinutenProduktionsZeit / 1440;    
         return anzahlTageProduktionszeit;
     }
     
     private void bestellungBestaetigen(Bestellung bestellung) {
         bestellung.bestellungBestaetigen();
-        System.out.println("Bestellung " + bestellung.gibBestellungsNr() + " bestätigt. Die Lieferzeit beträgt " + bestellung.gibLieferzeit() + "Tage");
+        System.out.println("\nBestellung " + bestellung.gibBestellungsNr() + " bestätigt. Die Lieferzeit beträgt " + bestellung.gibLieferzeit() + " Tage");
     }
 }

@@ -35,7 +35,7 @@ public abstract class Roboter extends Thread
             
                 // Den Thread eine kurze Zeit (0.1s) schlafen lassen, bis zur nächsten Überprüfung
                 try {
-                    Thread.sleep(100); 
+                    Thread.sleep(1000); 
                 } catch (InterruptedException ie) {
                     ie.printStackTrace();
                     // Hier könnte man den Interrupt-Status wiederherstellen oder Aufräumarbeiten ausführen

@@ -129,5 +129,4 @@ public class RoboterTest
         );
         assertEquals("Produktionszeit darf nicht negativ sein.", exception.getMessage());
     }
-
 }

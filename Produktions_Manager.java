@@ -94,6 +94,16 @@ public class Produktions_Manager extends Thread
         zuVerarbeitendeBestellungen.add(bestellung);
     }
     
+    //nur für Unit-Tests
+    public LinkedList<Bestellung> gibZuVerarbeitendeBestellungen()  {
+       return zuVerarbeitendeBestellungen;
+    }
+    
+    //nur für Unit-Tests    
+    public LinkedList<Bestellung> gibBestellungenInProduktion()  {
+       return bestellungenInProduktion;
+    }
+    
     private void starteProduktion(Bestellung bestellung){
         meinLager.wareLiefern(bestellung);
         
@@ -110,4 +120,6 @@ public class Produktions_Manager extends Thread
             produkt.naechsteProduktionsStation();      
         }
     }
+    
+    
 }

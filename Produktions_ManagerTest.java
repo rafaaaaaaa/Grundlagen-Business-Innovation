@@ -1,42 +1,91 @@
-
-
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import java.util.concurrent.*;
 
 /**
  * The test class Produktions_ManagerTest.
  *
- * @author  (your name)
- * @version (a version number or a date)
+ * @author Rafael Estermann
+ * @version 15.12.2024
  */
 public class Produktions_ManagerTest
 {
-    /**
-     * Default constructor for test class Produktions_ManagerTest
-     */
-    public Produktions_ManagerTest()
-    {
+    @Test
+    public void testFuegeZuVerarbeitendeBestellungHinzu() {
+        // Arrange
+        Produktions_Manager manager = new Produktions_Manager(new Fabrik(), new Lager(Executors.newSingleThreadExecutor()));
+        Bestellung bestellung = new Bestellung(1, 0, 123);
+    
+        // Act
+        manager.fuegeZuVerarbeitendeBestellungHinzu(bestellung);
+    
+        // Assert
+        assertEquals(1, manager.gibZuVerarbeitendeBestellungen().size(),
+            "Die Liste der zu verarbeitenden Bestellungen sollte einen Eintrag haben.");
+    }
+    
+    @Test
+    public void testZuVerarbeitendeBestellungenSinktMitDerZeit() throws InterruptedException {
+        // Arrange
+        Produktions_Manager manager = new Produktions_Manager(new Fabrik(), new Lager(Executors.newSingleThreadExecutor()));
+        Bestellung bestellung = new Bestellung(1, 0, 123);
+        manager.fuegeZuVerarbeitendeBestellungHinzu(bestellung);
+    
+        // Act
+        Thread managerThread = new Thread(manager);
+        managerThread.start();
+        Thread.sleep(1500); // Warten, bis die Bestellung verarbeitet wird
+        managerThread.interrupt(); // Manager-Thread beenden
+    
+        // Assert
+        assertTrue(manager.gibZuVerarbeitendeBestellungen().isEmpty(),
+            "Die Liste der zu verarbeitenden Bestellungen sollte leer sein, nachdem sie abgearbeitet wurde.");
+    }
+    
+    @Test
+    public void testBestellungWirdInProduktionVerschoben() throws InterruptedException {
+        // Arrange
+        Produktions_Manager manager = new Produktions_Manager(new Fabrik(), new Lager(Executors.newSingleThreadExecutor()));
+        Bestellung bestellung = new Bestellung(1, 0, 123);
+        manager.fuegeZuVerarbeitendeBestellungHinzu(bestellung);
+    
+        // Act
+        Thread managerThread = new Thread(manager);
+        managerThread.start();
+        Thread.sleep(1500); // Warten, bis die Bestellung verschoben wird
+        managerThread.interrupt(); // Manager-Thread beenden
+    
+        // Assert
+        assertTrue(manager.gibBestellungenInProduktion().contains(bestellung),
+            "Die Bestellung sollte in der Liste der Bestellungen in Produktion sein.");
+        assertFalse(manager.gibZuVerarbeitendeBestellungen().contains(bestellung),
+            "Die Bestellung sollte nicht mehr in der Liste der zu verarbeitenden Bestellungen sein.");
+    }
+    
+    @Test
+    public void testNurEineBestellungInProduktion() throws InterruptedException {
+        // Arrange
+        Produktions_Manager manager = new Produktions_Manager(new Fabrik(), new Lager(Executors.newSingleThreadExecutor()));
+        Bestellung bestellung1 = new Bestellung(1, 0, 123);
+        Bestellung bestellung2 = new Bestellung(0, 1, 124);
+        manager.fuegeZuVerarbeitendeBestellungHinzu(bestellung1);
+        manager.fuegeZuVerarbeitendeBestellungHinzu(bestellung2);
+    
+        // Act
+        Thread managerThread = new Thread(manager);
+        managerThread.start();
+        Thread.sleep(1500); // Warten, bis die erste Bestellung verarbeitet wird
+        managerThread.interrupt(); // Manager-Thread beenden
+    
+        // Assert
+        assertEquals(1, manager.gibBestellungenInProduktion().size(),
+            "Es sollte immer nur eine Bestellung in Produktion sein.");
+        assertTrue(manager.gibBestellungenInProduktion().contains(bestellung1),
+            "Die erste Bestellung sollte in Produktion sein.");
+        assertTrue(manager.gibZuVerarbeitendeBestellungen().contains(bestellung2),
+            "Die zweite Bestellung sollte noch in der Liste der zu verarbeitenden Bestellungen sein.");
     }
 
-    /**
-     * Sets up the test fixture.
-     *
-     * Called before every test case method.
-     */
-    @BeforeEach
-    public void setUp()
-    {
-    }
-
-    /**
-     * Tears down the test fixture.
-     *
-     * Called after every test case method.
-     */
-    @AfterEach
-    public void tearDown()
-    {
-    }
 }

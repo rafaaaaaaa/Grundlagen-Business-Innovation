@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=RoboterTest
+comment0.text=\r\n\ The\ test\ class\ RoboterTest.\r\n\r\n\ @author\ \ Rafael\ Estermann\r\n\ @version\ 15.12.2024\r\n
+comment1.params=
+comment1.target=void\ testFuegeProduktHinzu()
+comment2.params=
+comment2.target=void\ testWarteschlangeAbarbeiten()
+comment3.params=
+comment3.target=void\ testUmschaltzeit()
+comment4.params=
+comment4.target=void\ testKeineUmschaltzeit()
+comment5.params=
+comment5.target=void\ testGibName()
+comment6.params=
+comment6.target=void\ testSetzeProduktionszeitWithValidValues()
+comment7.params=
+comment7.target=void\ testSetzeProduktionszeitThrowsExceptionForNegativeValues()
+numComments=8

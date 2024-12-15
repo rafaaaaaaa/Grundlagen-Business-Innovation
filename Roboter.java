@@ -6,10 +6,9 @@ import java.util.LinkedList;
  * @author Rafael Estermann
  * @version 15.12.2024
  */
-public abstract class Roboter extends Thread
+public class Roboter extends Thread
 {
     // Instanzvariablen - ersetzen Sie das folgende Beispiel mit Ihren Variablen
-    private int x;
     private LinkedList<Produkt> warteschlange;
     private String name;
     private int produktionsZeit;
@@ -47,7 +46,6 @@ public abstract class Roboter extends Thread
                     }
                     
                     lastProducedIsPremium = (zuProduzierendesProdukt instanceof Premiumtuer);
-                    
                     produziereProdukt(zuProduzierendesProdukt);                    
                 }
             
@@ -68,7 +66,12 @@ public abstract class Roboter extends Thread
     }
     
     public void setzeProduktionsZeit(int zeit){
-        produktionsZeit = zeit;
+        // Quality Gate: Produktionszeit darf nicht negativ sein
+        if (zeit < 0) {
+            throw new IllegalArgumentException("Produktionszeit darf nicht negativ sein.");
+        }
+       
+        this.produktionsZeit = zeit;
     }
     
     //wird nicht auf Basisklasse implementiert, da jeder Roboter eigenn Namen hat
@@ -76,6 +79,17 @@ public abstract class Roboter extends Thread
         return name;
     }
     
-    //wird nicht auf Basisklasse implementiert, da jeder Roboter eigene Produktionslogik hat
-    public abstract void produziereProdukt(Produkt produkt);
+    //Dies wird nur für Unit-Testing gebraucht
+    public LinkedList<Produkt> gibWarteschlange(){
+        return warteschlange;
+    }
+    
+    //Dies wird nur für Unit-Testing gebraucht
+    public int gibProduktionszeit(){
+        return produktionsZeit;
+    }
+    
+    public void produziereProdukt(Produkt produkt) {
+         //wird nicht auf Basisklasse implementiert, da jeder Roboter eigene Produktionslogik hat. Wird entsprechend auch nicht in Unit Testklasse "RoboterTest" sonder beim Subklassen-Test getestet.
+    }
 }

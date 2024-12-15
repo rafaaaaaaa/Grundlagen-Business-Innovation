@@ -15,12 +15,6 @@ public class LagerTest {
     String nameTestClasse = "LagerTest"; // Name der Testklasse
 
     /**
-     * Konstruktor von LagerTest
-     */
-    public LagerTest() {
-    }
-
-    /**
      * Anweisungen vor jedem Testlauf
      */
     @BeforeEach

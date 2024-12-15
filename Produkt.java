@@ -46,7 +46,13 @@ public class Produkt {
     
     public void setzteProduktionsAblauf(Roboter roboter){
         produktionsAblauf.add(roboter);
-    }    
+    } 
+    
+    //wird nur für Unit Tests benötigt
+    public LinkedList<Roboter> gibProduktionsAblauf()
+    {
+       return produktionsAblauf;
+    } 
     
     public void naechsteProduktionsStation() {
         //Logik: wenn nichts mehr auf dem Produktionsablauf-Plan ansteht, ist das Produkt fertig produziert

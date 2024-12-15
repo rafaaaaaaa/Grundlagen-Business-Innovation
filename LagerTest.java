@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.ArrayList;
 
 /**
  * Klasse LagerTest
@@ -76,6 +77,73 @@ public class LagerTest {
         // Since 48 seconds are simulated as 48 milliseconds, check if it's within the expected range
         assertTrue(elapsedTime >= 48000 - 100 && elapsedTime <= 48000 + 100,
                 "Lagerauffuellen took " + elapsedTime + " milliseconds, expected around 48 milliseconds");
-    }    
+    }  
+    
+      @Test
+    public void testWareLiefernReduziertLagerbestand() {
+        // Arrange
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        Lager lager = new Lager(executorService);
+
+        // Erstelle eine Bestellung mit 2 Standardtüren und 1 Premiumtür
+        ArrayList<Produkt> produkte = new ArrayList<>();
+        produkte.add(new Standardtuer());
+        produkte.add(new Standardtuer());
+        produkte.add(new Premiumtuer());
+
+        Bestellung bestellung = new Bestellung(2, 1, 12345) {
+            @Override
+            public ArrayList<Produkt> gibBestellteProdukte() {
+                return produkte;
+            }
+        };
+
+        // Initiale Lagerbestände
+        int initialHolzeinheiten = 1000;
+        int initialSchrauben = 5000;
+        int initialFarbeeinheiten = 1000;
+        int initialKartoneinheiten = 1000;
+        int initialGlaseinheiten = 100;
+
+        // Materialien pro Tür (Annahmen)
+        int holzProStandardtuer = Standardtuer.gibHolzeinheiten();
+        int schraubenProStandardtuer = Standardtuer.gibSchrauben();
+        int farbeProStandardtuer = Standardtuer.gibFarbeinheiten();
+        int kartonProStandardtuer = Standardtuer.gibKartoneinheiten();
+
+        int holzProPremiumtuer = Premiumtuer.gibHolzeinheiten();
+        int schraubenProPremiumtuer = Premiumtuer.gibSchrauben();
+        int farbeProPremiumtuer = Premiumtuer.gibFarbeinheiten();
+        int kartonProPremiumtuer = Premiumtuer.gibKartoneinheiten();
+        int glasProPremiumtuer = Premiumtuer.gibGlaseinheiten();
+
+        int erwarteteHolzeinheiten = initialHolzeinheiten 
+            - 2 * holzProStandardtuer - holzProPremiumtuer;
+        int erwarteteSchrauben = initialSchrauben 
+            - 2 * schraubenProStandardtuer - schraubenProPremiumtuer;
+        int erwarteteFarbeeinheiten = initialFarbeeinheiten 
+            - 2 * farbeProStandardtuer - farbeProPremiumtuer;
+        int erwarteteKartoneinheiten = initialKartoneinheiten 
+            - 2 * kartonProStandardtuer - kartonProPremiumtuer;
+        int erwarteteGlaseinheiten = initialGlaseinheiten - glasProPremiumtuer;
+
+        // Act
+        lager.wareLiefern(bestellung);
+
+        // Assert
+        assertEquals(erwarteteHolzeinheiten, lager.gibVorhandeneHolzeinheiten(), 
+            "Die Holzeinheiten sollten korrekt reduziert werden.");
+        assertEquals(erwarteteSchrauben, lager.gibVorhandeneSchrauben(), 
+            "Die Schrauben sollten korrekt reduziert werden.");
+        assertEquals(erwarteteFarbeeinheiten, lager.gibVorhandeneFarbeeinheiten(), 
+            "Die Farbeeinheiten sollten korrekt reduziert werden.");
+        assertEquals(erwarteteKartoneinheiten, lager.gibVorhandeneKartoneinheiten(), 
+            "Die Kartoneinheiten sollten korrekt reduziert werden.");
+        assertEquals(erwarteteGlaseinheiten, lager.gibVorhandeneGlaseinheiten(), 
+            "Die Glaseinheiten sollten korrekt reduziert werden.");
+
+        // Beende den ExecutorService
+        executorService.shutdown();
+    }
 
 }

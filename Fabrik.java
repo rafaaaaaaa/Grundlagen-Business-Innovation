@@ -4,8 +4,8 @@ import java.util.concurrent.*;
 /**
  * Klasse Fabrik beinhaltet die Methoden der Fabrik
  *
- * @author Alex Marchese
- * @version 04.12.2024
+ * @author Rafael Estermann
+ * @version 15.12.2024
  */
 public class Fabrik {
     // Die Liste bestellteProdukte enthält alle Produkte, welche bestellt worden

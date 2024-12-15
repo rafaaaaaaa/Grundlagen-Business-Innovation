@@ -7,19 +7,13 @@ import org.junit.jupiter.api.Test;
 /**
  * Klasse ProduktTest
  *
- * @author Alex Marchese
- * @version 04.12.2024
+ * @author Rafael Estermann
+ * @version 15.12.2024
  */
 public class ProduktTest {
     String nameTestClasse = "ProduktTest"; // Name der Testklasse
 
-    /**
-     * Default constructor for test class ProduktTest
-     */
-    public ProduktTest() {
-    }
-
-    /**
+      /**
      * Anweisungen vor jedem Testlauf
      */
     @BeforeEach
@@ -64,4 +58,45 @@ public class ProduktTest {
         System.out.println("Test Produkt Setter funktioniert.");
 
     }
+    
+    @Test
+    public void testRoboterInProduktionsablaufHinzufuegen() {
+    // Arrange
+    Produkt produkt = new Produkt();
+    Roboter roboter = new Holzbearbeitungs_Roboter("Holzbot");
+
+    // Act
+    produkt.setzteProduktionsAblauf(roboter);
+
+    // Assert
+    assertTrue(produkt.gibProduktionsAblauf().contains(roboter), 
+            "Der Roboter sollte in der Produktionsablauf-Liste enthalten sein.");
+    assertEquals(1, produkt.gibProduktionsAblauf().size(),
+            "Die Produktionsablauf-Liste sollte genau einen Eintrag enthalten.");
+    }
+    
+    @Test
+    public void testZustandAendernNachLetzterProduktionsStation() {
+    // Arrange
+    Produkt produkt = new Produkt();
+    Roboter roboter1 = new Holzbearbeitungs_Roboter("Holzbot");
+    Roboter roboter2 = new Holzbearbeitungs_Roboter("Schraubenbot");
+
+    // Produktionsstationen hinzufügen
+    produkt.setzteProduktionsAblauf(roboter1);
+    produkt.setzteProduktionsAblauf(roboter2);
+
+    // Simuliere Abarbeitung der Produktionsstationen
+    produkt.naechsteProduktionsStation(); // Entfernt roboter1
+    produkt.naechsteProduktionsStation(); // Entfernt roboter2
+
+    // Act
+    produkt.naechsteProduktionsStation(); // Keine weiteren Roboter, Zustand sollte 2 sein
+
+    // Assert
+    assertEquals(2, produkt.aktuellerZustand(),
+            "Der Zustand sollte 2 sein, nachdem die letzte Produktionsstation abgearbeitet wurde.");
+}
+
+
 }

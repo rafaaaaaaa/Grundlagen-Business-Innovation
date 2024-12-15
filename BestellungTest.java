@@ -151,5 +151,36 @@ public class BestellungTest {
         assert (exception.getMessage().contains("Bestellmenge ist zu gross. Maximal 10 Tausend pro Artikel."));
 
     }
+    
+    @Test
+    public void testSetzeAlleProdukteProduziert() {
+    // Arrange
+    Bestellung bestellung = new Bestellung(5, 3, 12345); // Beispiel mit 5 Standardtüren und 3 Premiumtüren
+
+    // Act
+    bestellung.setzeAlleProdukteProduziert();
+
+    // Assert
+    assertTrue(bestellung.gibAlleProdukteProduziert(), 
+            "Der Status 'alleProdukteProduziert' sollte nach dem Aufruf von setzeAlleProdukteProduziert() auf true gesetzt sein.");
+}
+
+@Test
+public void testGibAlleProdukteProduziert() {
+    // Arrange
+    Bestellung bestellung = new Bestellung(2, 1, 67890); // Beispiel mit 2 Standardtüren und 1 Premiumtür
+
+    // Act & Assert
+    // Anfangsstatus überprüfen
+    assertFalse(bestellung.gibAlleProdukteProduziert(), 
+            "Der Status 'alleProdukteProduziert' sollte standardmäßig false sein.");
+
+    // Status setzen und überprüfen
+    bestellung.setzeAlleProdukteProduziert();
+    assertTrue(bestellung.gibAlleProdukteProduziert(), 
+            "Der Status 'alleProdukteProduziert' sollte true sein, nachdem setzeAlleProdukteProduziert() aufgerufen wurde.");
+}
+
+
 
 }

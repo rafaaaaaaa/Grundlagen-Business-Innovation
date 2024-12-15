@@ -174,4 +174,54 @@ public class Lager {
                 " Vorhandene Kartoneinheiten: " + vorhandeneKartoneinheiten +
                 " Vorhandene Glaseinheiten: " + vorhandeneGlaseinheiten + "\n\n");
     }
+    
+    /**
+     * Gibt die vorhandenen Holzeinheiten zurück.
+     * Diese Methode wird für Unit-Tests benötigt.
+     *
+     * @return Die Anzahl der vorhandenen Holzeinheiten.
+     */
+    public int gibVorhandeneHolzeinheiten() {
+        return vorhandeneHolzeinheiten;
+    }
+
+    /**
+     * Gibt die vorhandenen Schrauben zurück.
+     * Diese Methode wird für Unit-Tests benötigt.
+     *
+     * @return Die Anzahl der vorhandenen Schrauben.
+     */
+    public int gibVorhandeneSchrauben() {
+        return vorhandeneSchrauben;
+    }
+
+    /**
+     * Gibt die vorhandenen Farbeeinheiten zurück.
+     * Diese Methode wird für Unit-Tests benötigt.
+     *
+     * @return Die Anzahl der vorhandenen Farbeeinheiten.
+     */
+    public int gibVorhandeneFarbeeinheiten() {
+        return vorhandeneFarbeeinheiten;
+    }
+
+    /**
+     * Gibt die vorhandenen Kartoneinheiten zurück.
+     * Diese Methode wird für Unit-Tests benötigt.
+     *
+     * @return Die Anzahl der vorhandenen Kartoneinheiten.
+     */
+    public int gibVorhandeneKartoneinheiten() {
+        return vorhandeneKartoneinheiten;
+    }
+
+    /**
+     * Gibt die vorhandenen Glaseinheiten zurück.
+     * Diese Methode wird für Unit-Tests benötigt.
+     *
+     * @return Die Anzahl der vorhandenen Glaseinheiten.
+     */
+    public int gibVorhandeneGlaseinheiten() {
+        return vorhandeneGlaseinheiten;
+    }
 }

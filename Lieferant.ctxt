@@ -1,7 +1,10 @@
 #BlueJ class context
 comment0.target=Lieferant
-comment0.text=\r\n\ Klasse\ Lager\ beinhaltet\ die\ Methoden\ des\ Lager\r\n\r\n\ @author\ Rafael\ Estermann\r\n\ @version\ 23.11.2024\r\n
-comment1.params=holzEinheiten\ schraubenEinheiten\ farbEinheiten\ kartonEinheiten\ glasEinheiten
-comment1.target=boolean\ wareBestellen(int,\ int,\ int,\ int,\ int)
-comment1.text=\r\n\ Mit\ dieser\ Methode\ werden\ neue\ Ware\ bestellt,\ anhand\ zu\ bestellenden\ Einheiten\ \r\n\ \r\n\ @param\ holzEinheiten\ Anzahl\ zu\ bestellenden\ Holzeinheiten\r\n\ @param\ schraubenEinheiten\ Anzahl\ zu\ bestellenden\ Holzeinheiten\r\n\ @param\ farbEinheiten\ Anzahl\ zu\ bestellenden\ Holzeinheiten\r\n\ @param\ kartonEinheiten\ Anzahl\ zu\ bestellenden\ Holzeinheiten\r\n\ @param\ glasEinheiten\ Anzahl\ zu\ bestellenden\ Holzeinheiten\r\n\ @return\ bestellungErfolgreich\ Je\ nachdem\ ob\ bestellung\ gemacht\ werden\ konnte\ oder\ nicht.\r\n
-numComments=2
+comment0.text=\r\n\ Diese\ Klasse\ wird\ verwendet,\ um\ die\ Lieferzeiten\ des\ Lieferanten\ und\ die\r\n\ Bestellung\ \u00FCber\ diesen\ zu\ simulieren.\r\n\r\n\ @author\ Rafael\ Estermann\r\n\ @version\ 14.12l.2024\r\n
+comment1.params=
+comment1.target=Lieferant()
+comment1.text=\r\n\ Konstruktor\ der\ Klasse\ Lieferant\r\n
+comment2.params=holzEinheiten\ schrauben\ farbEinheiten\ kartonEinheiten\ glasEinheiten
+comment2.target=boolean\ wareBestellen(int,\ int,\ int,\ int,\ int)
+comment2.text=\r\n\ Mit\ dieser\ Methode\ wird\ die\ Bestellung\ bei\ dem\ Lieferanten\ simuliert\r\n\ und\ eine\ Lieferzeit\ von\ zwei\ Tagen\ (simuliert\ als\ 48\ Sekunden)\ hinzugef\u00FCgt.\r\n\ \r\n\ @param\ holzEinheiten\ \ \ Anzahl\ bestellter\ Holzeinheiten\r\n\ @param\ schrauben\ \ \ \ \ \ \ Anzahl\ bestellter\ Schrauben\r\n\ @param\ farbEinheiten\ \ \ Anzahl\ bestellter\ Farbeinheiten\r\n\ @param\ kartonEinheiten\ Anzahl\ bestellter\ Kartoneinheiten\r\n\ @param\ glasEinheiten\ \ \ Anzahl\ bestellter\ Glaseinheiten\r\n\ @return\ true,\ wenn\ die\ Bestellung\ erfolgreich\ ist\r\n
+numComments=3

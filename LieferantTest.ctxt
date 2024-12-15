@@ -1,10 +1,15 @@
 #BlueJ class context
 comment0.target=LieferantTest
-comment0.text=\r\n\ The\ test\ class\ LieferantTest.\r\n\r\n\ @author\ \ Rafael\ Estermann\r\n\ @version\ 23.11.2024\r\n
+comment0.text=\r\n\ Klasse\ LieferantTest\r\n\r\n\ @author\ Alex\ Marchese\r\n\ @version\ 04.12.2024\r\n
 comment1.params=
-comment1.target=void\ testWareBestellenErfolgreich()
+comment1.target=LieferantTest()
+comment1.text=\r\n\ Konstruktor\ von\ LieferantTest\r\n
 comment2.params=
-comment2.target=void\ testWareBestellenFehlgeschlagenNegativerWert()
+comment2.target=void\ setUp()
+comment2.text=\r\n\ Anweisungen\ vor\ jedem\ Testlauf\r\n
 comment3.params=
-comment3.target=void\ testWareBestellenAlleNull()
-numComments=4
+comment3.target=void\ tearDown()
+comment3.text=\r\n\ Anweisungen\ nach\ jedem\ Testlauf\r\n
+comment4.params=
+comment4.target=void\ testeWareBestellen()
+numComments=5

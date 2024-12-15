@@ -1,0 +1,13 @@
+#BlueJ class context
+comment0.target=Produktions_Manager
+comment0.text=\r\n\ Beschreiben\ Sie\ hier\ die\ Klasse\ Produktions_Manager.\r\n\ \r\n\ @author\ Rafael\ Estermann\ \r\n\ @version\ 15.12.2024\r\n
+comment1.params=meineFabrik\ meinLager
+comment1.target=Produktions_Manager(Fabrik,\ Lager)
+comment1.text=\r\n\ Konstruktor\ f\u00FCr\ Objekte\ der\ Klasse\ Produktions_Manager\r\n
+comment2.params=
+comment2.target=void\ run()
+comment3.params=bestellung
+comment3.target=void\ fuegeZuVerarbeitendeBestellungHinzu(Bestellung)
+comment4.params=bestellung
+comment4.target=void\ starteProduktion(Bestellung)
+numComments=5

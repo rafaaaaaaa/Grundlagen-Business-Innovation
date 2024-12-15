@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=BestellungTest
-comment0.text=\r\n\ Klasse\ BestellungTest\r\n\r\n\ @author\ Alex\ Marchese\r\n\ @version\ 06.11.2024\r\n
+comment0.text=\r\n\ Klasse\ BestellungTest\r\n\r\n\ @author\ Alex\ Marchese\r\n\ @version\ 04.12.2024\r\n
 comment1.params=
 comment1.target=BestellungTest()
 comment1.text=\r\n\ Konstruktor\ von\ BestellungTest\r\n
@@ -15,11 +15,9 @@ comment4.target=void\ testeBestellung()
 comment5.params=
 comment5.target=void\ testeBestellungBestaetigen()
 comment6.params=
-comment6.target=void\ testeSetzeLieferzeit()
+comment6.target=void\ testeSetzeBeschaffungsZeit()
 comment7.params=
-comment7.target=void\ testeLiefereBestellteProdukte()
+comment7.target=void\ testeSetzeLieferzeit()
 comment8.params=
-comment8.target=void\ testeSetzeBeschaffungsZeit()
-comment9.params=
-comment9.target=void\ testeFehlerbehandlung()
-numComments=10
+comment8.target=void\ testeFehlerbehandlung()
+numComments=9

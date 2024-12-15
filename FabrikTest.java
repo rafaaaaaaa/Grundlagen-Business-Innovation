@@ -3,19 +3,15 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 /**
  * Klasse FabrikTest
  *
- * @author Rafael Estermann
- * @version 23.11.2024
+ * @author Alex Marchese
+ * @version 04.12.2024
  */
 public class FabrikTest {
     String nameTestClasse = "FabrikTest"; // Name der Testklasse
-    ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    PrintStream originalOut = System.out; // Save the original System.out
 
     /**
      * Konstruktor von FabrikTest
@@ -30,8 +26,6 @@ public class FabrikTest {
     public void setUp() {
         System.out.println("Testlauf " + nameTestClasse + " Start");
         System.out.println();
-        
-        System.setOut(new PrintStream(outputStream)); // Redirect System.out
     }
 
     /**
@@ -53,17 +47,17 @@ public class FabrikTest {
         // Instanzierung einer Fabrik
         Fabrik testFabrik = new Fabrik();
         testFabrik.bestellungAufgeben(2, 5);
-        
+
         Bestellung ersteBestellung = testFabrik.gibBestellungen().get(0);
-        
+
         // Überprüfung, dass die Arraylist die Produkte enthält. Es müssen genau 7 sein
-        assertEquals(ersteBestellung.liefereBestellteProdukte().size(), 7);
+        assertEquals(ersteBestellung.gibBestellteProdukte().size(), 7);
 
         // Kontrolle, dass es genau 2 Standartüren und 5 Premiumtüren sind
         int anzahlStandardTueren = 0;
         int anzahlPremiumtueren = 0;
 
-        for (Object produkt : ersteBestellung.liefereBestellteProdukte()) {
+        for (Object produkt : ersteBestellung.gibBestellteProdukte()) {
             if (produkt instanceof Standardtuer) {
                 anzahlStandardTueren++;
             } else if (produkt instanceof Premiumtuer) {
@@ -74,97 +68,15 @@ public class FabrikTest {
         assertEquals(2, anzahlStandardTueren);
         assertEquals(5, anzahlPremiumtueren);
 
-        System.out.println("Test Bestellung mit erlaubten Werten. Produkte wurden bestellt");
+        System.out.println(
+                "Test Bestellung mit erlaubten Werten. Produkte wurden bestellt");
 
     }
-    
-    
+
     @Test
     /**
-     * Testet, ob bei einer riesigen Bestellung, die Beschaffungszeit und Lieferzeit korrekt berechnet wird.
-     */
-    public void testeBestellungAufgaben__WhenBestandZuNiederig_BerechneZeiten() {
-
-        // Instanzierung einer Fabrik
-        Fabrik testFabrik = new Fabrik();
-        testFabrik.bestellungAufgeben(10000, 10000);
-                
-        int expectedBeschaffungszeit = 2;
-        int expectedStandardLieferzeit = 1;
-        float expectedProduktionszeit = (float)(10000 * Standardtuer.gibProduktionszeit() + 10000 * Premiumtuer.gibProduktionszeit()) / 1440;
-        float expectedLieferzeit = expectedProduktionszeit + expectedStandardLieferzeit + expectedBeschaffungszeit;
-
-        assertEquals(testFabrik.gibBestellungen().get(0).gibBeschaffungsZeit(), expectedBeschaffungszeit);
-        assertEquals(testFabrik.gibBestellungen().get(0).gibLieferzeit(), expectedLieferzeit);
-
-        System.out.println("Beschaffungszeit und Lieferzeit wurden korrekt berechnet");
-
-    }
-    
-     @Test
-    /**
-     * Testet, ob bei einer kleinen Bestellung, die Beschaffungszeit und Lieferzeit korrekt berechnet wird.
-     */
-    public void testeBestellungAufgaben__WhenBestandZuGenügend_BerechneZeiten() {
-
-        // Instanzierung einer Fabrik
-        Fabrik testFabrik = new Fabrik();
-        testFabrik.bestellungAufgeben(1, 1);
-                
-        int expectedBeschaffungszeit = 0;
-        int expectedStandardLieferzeit = 1;
-        float expectedProduktionszeit = (float)(1 * Standardtuer.gibProduktionszeit() + 1 * Premiumtuer.gibProduktionszeit()) / 1440;
-        float expectedLieferzeit = expectedProduktionszeit + expectedStandardLieferzeit + expectedBeschaffungszeit;
-
-        assertEquals(testFabrik.gibBestellungen().get(0).gibBeschaffungsZeit(), expectedBeschaffungszeit);
-        assertEquals(testFabrik.gibBestellungen().get(0).gibLieferzeit(), expectedLieferzeit);
-
-        System.out.println("Beschaffungszeit und Lieferzeit wurden korrekt berechnet");
-
-    }
-    
-    @Test
-    /**
-     * Testet, ob beim Eingang einer Bestellung automatisch geprüft wird, ob der Lagerbestand "minimal" ist
-     */
-    public void testeLagerbestandAuffuellen_WhenBestandMinimial_AuffuellenBeiBestellungEingang() {
-
-        // Instanzierung einer Fabrik
-        Fabrik testFabrik = new Fabrik();
-        testFabrik.bestellungAufgeben(1, 1);
-        
-        // Lese den Output
-        String consoleOutput = outputStream.toString();
-
-        // Verify the console output contains the expected text
-        assertTrue(consoleOutput.contains("Lieferung erfolgreich"));              
-      
-    }
-    
-        @Test
-    /**
-     * Testet, ob beim Eingang einer Bestellung automatisch geprüft wird, ob der Lagerbestand "minimal" ist
-     */
-    public void testeLagerbestandAuffuellen_WhenBestandNichtMinimial_NichtAuffuellenBeiBestellungEingang() {
-
-        // Instanzierung einer Fabrik
-        Fabrik testFabrik = new Fabrik();
-        testFabrik.lagerAuffuellen();
-        outputStream.reset();
-        testFabrik.bestellungAufgeben(1, 1);
-        
-        // Lese den Output
-        String consoleOutput = outputStream.toString();
-
-        // Verify the console output contains the expected text
-        assertFalse(consoleOutput.contains("Lieferung erfolgreich"));              
-      
-    }
-
-    
-    @Test
-    /**
-     * Testet, dass bei der Eingabe von unzulässigen Werten, keine Bestellung aufgegeben wird
+     * Testet, dass bei der Eingabe von unzulässigen Werten, keine Bestellung
+     * aufgegeben wird
      */
     public void testeBestellungFalsch() {
 
@@ -176,12 +88,68 @@ public class FabrikTest {
         testFabrik.bestellungAufgeben(15_000, 0);
         // Ein Negativwert
         testFabrik.bestellungAufgeben(-5, 0);
-        
+
         // Kontrolle, dass keine Bestellung durchgegangen ist
         assertEquals(testFabrik.gibBestellungen().size(), 0);
 
         System.out.println(
                 "Test Bestellung mit unerlaubten Argumenten. Nichts wurde bestellt");
 
+    }
+
+    @Test
+    /**
+     * Testet, dass die in Abgabe 2 neu implementierten Befehle korrket
+     * funktionieren
+     */
+    public void testeBestellungAufgeben() {
+
+        // Instanzierung einer Fabrik
+        Fabrik testFabrik = new Fabrik();
+
+        /// Genügende Materialien auf Lager (bei 2 StandardT und 5 PremiumT der Fall)
+
+        testFabrik.bestellungAufgeben(2, 5);
+
+        Bestellung ersteBestellung = testFabrik.gibBestellungen().get(0);
+
+        // Kontrolle der Beschaffungszeit
+        assertEquals(testFabrik.gibLager().gibBeschaffungsZeit(ersteBestellung), 0);
+
+        // Kontrolle, dass das Lager nicht aufgefüllt wird
+        assertEquals(testFabrik.gibLagerAuffuellungen(), 0);
+
+        // Kontrolle der Lieferzeit
+        assertEquals(Math.round(ersteBestellung.gibLieferzeit() * 100) / 100f, 1.12f); // 0 + (10 * 2 + 30 * 5) / (60 *
+                                                                                       // 24) + 1 -> runden auf 2
+                                                                                       // Kommastellen: 1.12
+        // Kontrolle, dass Bestellung bestätigt wird
+        assertTrue(ersteBestellung.gibBestellBestaetigung());
+
+        /// Ungenügende Materialien auf Lager (bei 21 PremiumT der Fall) -> bei
+        /// den Glaseinheiten: 100 (auf Lager) - 5 * 21 = -5 => nachbestellen.
+        /// N.B. eingentlich werden bei der ersten Bestellung schon 25 Glaseinheiten
+        /// verwendet. Da noch nicht produziert wird (Abgabe 3), werden sie auch nicht
+        /// abgezogen
+
+        testFabrik.bestellungAufgeben(0, 21);
+
+        Bestellung zweiteBestellung = testFabrik.gibBestellungen().get(1);
+
+        // Kontrolle der Beschaffungszeit
+        assertEquals(testFabrik.gibLager().gibBeschaffungsZeit(zweiteBestellung), 2);
+
+        // Kontrolle, dass das Lager aufgefüllt wird
+        assertEquals(testFabrik.gibLagerAuffuellungen(), 1);
+
+        // Kontrolle der Lieferzeit
+        assertEquals(Math.round(zweiteBestellung.gibLieferzeit() * 100) / 100f, 3.44f); // 2 + (30 * 21) / (60 *
+                                                                                        // 24) + 1 -> runden auf 2
+                                                                                        // Kommastellen: 3.44
+        // Kontrolle, dass Bestellung bestätigt wird
+        assertTrue(zweiteBestellung.gibBestellBestaetigung());
+        
+        System.out.println(
+                "Test für Abgabe 2 angepasste Methode bestellungAufgeben()");
     }
 }

@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
  * Klasse ProduktTest
  *
  * @author Alex Marchese
- * @version 06.11.2024
+ * @version 04.12.2024
  */
 public class ProduktTest {
     String nameTestClasse = "ProduktTest"; // Name der Testklasse

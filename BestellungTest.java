@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows; //optional
  * Klasse BestellungTest
  *
  * @author Alex Marchese
- * @version 06.11.2024
+ * @version 04.12.2024
  */
 public class BestellungTest {
     String nameTestClasse = "BestellungTest"; // Name der Testklasse
@@ -55,7 +55,7 @@ public class BestellungTest {
         // Testen von automatisch initialisierten Werten
         assertEquals(testBestellung.gibBestellBestaetigung(), false);
         assertEquals(testBestellung.gibBeschaffungsZeit(), -1);
-        assertEquals(testBestellung.gibLieferzeit(), 1);
+        assertEquals(testBestellung.gibLieferzeit(), -1);
 
         System.out.println(
                 "Test Bestellung mit Variableneingabe erfolgreich. Initialisierung mit Selbstdefinierten Variablen und Standardwerten funktioniert.");
@@ -79,38 +79,6 @@ public class BestellungTest {
                 "Test Methode bestellungBestaetigen erfolgreich.");
 
     }
-    
-       @Test
-    /**
-     * Testet bestellungBestaetigen()
-     */
-    public void testeSetzeLieferzeit() {
-
-        // Instanzierung einer Bestellung
-        Bestellung testBestellung = new Bestellung(5, 7, 2);
-
-        assertEquals(testBestellung.gibLieferzeit(), 1);
-        testBestellung.setzeLieferzeit(3);
-        assertEquals(testBestellung.gibLieferzeit(), 3);
-
-        System.out.println("Test Methode bestellungBestaetigen erfolgreich.");
-
-    }
-    
-    @Test
-    /**
-     * Testet liefereBestellteProdukte()
-     */
-    public void testeLiefereBestellteProdukte() {
-
-        // Instanzierung einer Bestellung mit insgesamt 10 Produkten
-        Bestellung testBestellung = new Bestellung(5, 5, 2);
-
-        assertEquals(testBestellung.liefereBestellteProdukte().size(), 10);
-
-        System.out.println("Test Methode LiefereBestellteProdukte erfolgreich.");
-
-    }
 
     @Test
     /**
@@ -128,43 +96,59 @@ public class BestellungTest {
         System.out.println("Test Setter setzeBeschaffungsZeit erfolgreich.");
 
     }
+    
+    @Test
+    /**
+     * Testet setzeLieferzeit()
+     */
+    public void testeSetzeLieferzeit() {
 
-    @Test //Optional
+        // Instanzierung einer Bestellung
+        Bestellung testBestellung = new Bestellung(5, 7, 2);
+
+        assertEquals(testBestellung.gibLieferzeit(), -1);
+        testBestellung.setzeLieferzeit(2);
+        assertEquals(testBestellung.gibLieferzeit(), 2);
+
+        System.out.println("Test Setter setzeLieferzeit erfolgreich.");
+
+    }
+
+    @Test // Optional
     /**
      * Test der Fehlerbehandlung (der Exceptions)
      */
-    public void testeFehlerbehandlung() {       
-        
+    public void testeFehlerbehandlung() {
+
+        // Optional -> wir haben Exceptions nicht zusammen gesehen
+
         // Negativwerte
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
             new Bestellung(-1, 5, 1); // Standardtür Negativwert
         });
-        
-        assert(exception.getMessage().contains("Ungültige Bestellmenge. Kann nicht negativ sein."));
+        assert (exception.getMessage().contains("Ungültige Bestellmenge. Kann nicht negativ sein."));
 
         exception = assertThrows(IllegalArgumentException.class, () -> {
             new Bestellung(5, -1, 2); // Premiumtür Negativwert
         });
-        assert(exception.getMessage().contains("Ungültige Bestellmenge. Kann nicht negativ sein."));
-        
-        
+        assert (exception.getMessage().contains("Ungültige Bestellmenge. Kann nicht negativ sein."));
+
         // Beide Werte von Türen Null
         exception = assertThrows(IllegalArgumentException.class, () -> {
             new Bestellung(0, 0, 3);
         });
-        assert(exception.getMessage().contains("Die Bestellung muss mindestens ein Produkt enthalten."));
-        
-        
+        assert (exception.getMessage().contains("Die Bestellung muss mindestens ein Produkt enthalten."));
+
         // Zu hohe Bestellmenge
         exception = assertThrows(IllegalArgumentException.class, () -> {
             new Bestellung(11_000, 5, 4); // Standardtür hohe Bestellmenge
         });
-        assert(exception.getMessage().contains("Bestellmenge ist zu gross. Maximal 10 Tausend pro Artikel."));
+        assert (exception.getMessage().contains("Bestellmenge ist zu gross. Maximal 10 Tausend pro Artikel."));
 
         exception = assertThrows(IllegalArgumentException.class, () -> {
             new Bestellung(5, 12_000, 5); // Premiumtür hohe Bestellmenge
         });
-        assert(exception.getMessage().contains("Bestellmenge ist zu gross. Maximal 10 Tausend pro Artikel."));
+        assert (exception.getMessage().contains("Bestellmenge ist zu gross. Maximal 10 Tausend pro Artikel."));
 
     }
 

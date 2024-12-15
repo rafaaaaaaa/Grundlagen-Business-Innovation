@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=Holzbearbeitungs_Roboter
+comment0.text=\r\n\ Beschreiben\ Sie\ hier\ die\ Klasse\ Holzbearbeitungs_Roboter.\r\n\ \r\n\ @author\ Rafael\ Estermann\r\n\ @version\ 15.12.2024\r\n
+comment1.params=name
+comment1.target=Holzbearbeitungs_Roboter(java.lang.String)
+comment2.params=produkt
+comment2.target=void\ produziereProdukt(Produkt)
+numComments=3

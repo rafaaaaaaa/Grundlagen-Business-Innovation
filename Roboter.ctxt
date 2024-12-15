@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.target=Roboter
+comment0.text=\r\n\ Beschreiben\ Sie\ hier\ die\ Klasse\ Roboter.\r\n\ \r\n\ @author\ Rafael\ Estermann\r\n\ @version\ 15.12.2024\r\n
+comment1.params=name
+comment1.target=Roboter(java.lang.String)
+comment2.params=
+comment2.target=void\ run()
+comment3.params=produkt
+comment3.target=void\ fuegeProduktHinzu(Produkt)
+comment4.params=zeit
+comment4.target=void\ setzeProduktionsZeit(int)
+comment5.params=produkt
+comment5.target=java.lang.String\ gibNamen(Produkt)
+comment6.params=produkt
+comment6.target=void\ produziereProdukt(Produkt)
+numComments=7

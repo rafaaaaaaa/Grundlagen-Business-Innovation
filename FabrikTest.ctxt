@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=FabrikTest
-comment0.text=\r\n\ Klasse\ FabrikTest\r\n\r\n\ @author\ Rafael\ Estermann\r\n\ @version\ 23.11.2024\r\n
+comment0.text=\r\n\ Klasse\ FabrikTest\r\n\r\n\ @author\ Alex\ Marchese\r\n\ @version\ 04.12.2024\r\n
 comment1.params=
 comment1.target=FabrikTest()
 comment1.text=\r\n\ Konstruktor\ von\ FabrikTest\r\n
@@ -13,13 +13,7 @@ comment3.text=\r\n\ Anweisungen\ nach\ jedem\ Testlauf\r\n
 comment4.params=
 comment4.target=void\ testeBestellung()
 comment5.params=
-comment5.target=void\ testeBestellungAufgaben__WhenBestandZuNiederig_BerechneZeiten()
+comment5.target=void\ testeBestellungFalsch()
 comment6.params=
-comment6.target=void\ testeBestellungAufgaben__WhenBestandZuGen\u00FCgend_BerechneZeiten()
-comment7.params=
-comment7.target=void\ testeLagerbestandAuffuellen_WhenBestandMinimial_AuffuellenBeiBestellungEingang()
-comment8.params=
-comment8.target=void\ testeLagerbestandAuffuellen_WhenBestandNichtMinimial_NichtAuffuellenBeiBestellungEingang()
-comment9.params=
-comment9.target=void\ testeBestellungFalsch()
-numComments=10
+comment6.target=void\ testeBestellungAufgeben()
+numComments=7

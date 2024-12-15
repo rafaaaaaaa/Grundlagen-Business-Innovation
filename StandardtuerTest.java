@@ -1,3 +1,4 @@
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -6,8 +7,8 @@ import org.junit.jupiter.api.Test;
 /**
  * Klasse StandardtuerTest
  *
- * @author Rafael Estermann
- * @version 23.11.2024
+ * @author Alex Marchese
+ * @version 04.12.2024
  */
 public class StandardtuerTest {
     String nameTestClasse = "StandardtuerTest"; // Name der Testklasse

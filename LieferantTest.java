@@ -1,34 +1,62 @@
+
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows; //optional
 
 /**
- * The test class LieferantTest.
+ * Klasse LieferantTest
  *
- * @author  Rafael Estermann
- * @version 23.11.2024
+ * @author Alex Marchese
+ * @version 04.12.2024
  */
-public class LieferantTest
-{
-     @Test
-    public void testWareBestellenErfolgreich() {
-        Lieferant lieferant = new Lieferant();
-        boolean result = lieferant.wareBestellen(10, 5, 3, 2, 1);
-        assertTrue(result, "Die Bestellung sollte erfolgreich sein, wenn alle Werte >= 0 sind.");
+public class LieferantTest {
+    String nameTestClasse = "LieferantTest"; // Name der Testklasse
+
+    /**
+     * Konstruktor von LieferantTest
+     */
+    public LieferantTest() {
     }
 
-    @Test
-    public void testWareBestellenFehlgeschlagenNegativerWert() {
-        Lieferant lieferant = new Lieferant();
-        boolean result = lieferant.wareBestellen(-1, 5, 3, 2, 1);
-        assertFalse(result, "Die Bestellung sollte fehlschlagen, wenn ein Wert negativ ist.");
+    /**
+     * Anweisungen vor jedem Testlauf
+     */
+    @BeforeEach
+    public void setUp() {
+        System.out.println("Testlauf " + nameTestClasse + " Start");
+        System.out.println();
     }
 
-    @Test
-    public void testWareBestellenAlleNull() {
-        Lieferant lieferant = new Lieferant();
-        boolean result = lieferant.wareBestellen(0, 0, 0, 0, 0);
-        assertFalse(result, "Die Bestellung sollte erfolgreich sein, wenn alle Werte 0 sind.");
+    /**
+     * Anweisungen nach jedem Testlauf
+     */
+    @AfterEach
+    public void tearDown() {
+        System.out.println();
+        System.out.println("Testlauf " + nameTestClasse + " Ende");
+        System.out.println("------------------------");
     }
+
+
+    @Test
+    /**
+     * Testet wareBestellen()
+     */
+    public void testeWareBestellen() {
+
+        
+        // Instanzierung eines Lieferanten
+        Lieferant testLieferant = new Lieferant();
+        assertTrue(testLieferant.wareBestellen(2, 4, 50, 3, 2));
+        
+        
+        System.out.println(
+                "Test Methode wareBestellen erfolgreich.");
+
+    }
+
+    
+
 }

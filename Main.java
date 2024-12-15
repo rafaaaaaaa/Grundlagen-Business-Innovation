@@ -19,13 +19,13 @@ public class Main {
         
         try {
              Thread.sleep(15000);
-             testFabrik.bestellungAufgeben(1, 0);
-             
+             testFabrik.bestellungAufgeben(1, 0);           
              
              Thread.sleep(2000);
              testFabrik.bestellungAufgeben(2, 5);
              testFabrik.bestellungAufgeben(4, 9);
              testFabrik.bestellungAufgeben(1, 6);
+             
              Thread.sleep(2000);
              testFabrik.bestellungAufgeben(3, 8);
         }

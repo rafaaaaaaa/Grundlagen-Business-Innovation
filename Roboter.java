@@ -28,7 +28,7 @@ public abstract class Roboter extends Thread
                 if (!warteschlange.isEmpty()) {
                     System.out.println(warteschlange.size() + " Produkt(e) in Warteschlange");
                     
-                    // Das nächste Produkt produzieren aus der Liste der zu verarbeitenden Bestellungen entnehmen
+                    // Das nächste Produkt produzieren aus der Liste der zu verarbeitenden Bestellungen entnehmen (wieder: First-in-First-out)
                     Produkt zuProduzierendesProdukt = warteschlange.removeFirst();                     
                     produziereProdukt(zuProduzierendesProdukt);                    
                 }

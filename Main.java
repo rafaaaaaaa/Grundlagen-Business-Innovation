@@ -15,12 +15,19 @@ public class Main {
         System.out.println("Willkommen bei der AEKI Fabrik.");      
 
         testFabrik.bestellungAufgeben(3, 2);        
-        testFabrik.bestellungAufgeben(1, 0);
-        testFabrik.bestellungenAusgeben();
+        testFabrik.bestellungAufgeben(1, 0);     
         
         try {
              Thread.sleep(15000);
              testFabrik.bestellungAufgeben(1, 0);
+             
+             
+             Thread.sleep(2000);
+             testFabrik.bestellungAufgeben(2, 5);
+             testFabrik.bestellungAufgeben(4, 9);
+             testFabrik.bestellungAufgeben(1, 6);
+             Thread.sleep(2000);
+             testFabrik.bestellungAufgeben(3, 8);
         }
         catch(Exception e){
             

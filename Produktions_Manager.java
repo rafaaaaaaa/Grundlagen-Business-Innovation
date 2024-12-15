@@ -35,7 +35,7 @@ public class Produktions_Manager extends Thread
         verpackungsRoboter = new Verpackungs_Roboter("Verpackungs Roboter");
         
         //Exemplarisches Starten Holz Roboter Threads
-        holzRoboter.start();  // <-- This actually launches the thread        
+        holzRoboter.start();  
         
         //Fabrik und Lager assignen
         this.meineFabrik = meineFabrik;
@@ -47,7 +47,7 @@ public class Produktions_Manager extends Thread
           while (true) {
                 // Prüfen, ob eine neue Bestellung eingetroffen ist
                 if (!zuVerarbeitendeBestellungen.isEmpty()) {
-                    // Die nächste Bestellung aus der Liste der zu verarbeitenden Bestellungen entnehmen
+                    // Die nächste Bestellung aus der Liste der zu verarbeitenden Bestellungen entnehmen (First In, First Out)
                     Bestellung bestellung = zuVerarbeitendeBestellungen.removeFirst();
                                         
                     // Bestellung in die Liste der Bestellungen in Produktion verschieben
@@ -55,9 +55,13 @@ public class Produktions_Manager extends Thread
                     
                     // Produktion starten 
                     starteProduktion(bestellung);
-                }                
+                }           
+                
+                if(zuVerarbeitendeBestellungen.size() != 0){
+                    System.out.println("Zu verarbeitende Bestellungen " + zuVerarbeitendeBestellungen.size());
+                }
                                
-                //Prüfen ob bestehende Bestellungen bereits fertig Produziert sind
+                //Prüfen ob bestehende Produkte bestehender Bestellungen bereits fertig produziert sind
                 for(Bestellung bestellung : bestellungenInProduktion){
                     ArrayList<Produkt> produkteInBestellung = bestellung.gibBestellteProdukte();
                     boolean alleProdukteProduziert = produkteInBestellung.stream().allMatch(prod -> prod.aktuellerZustand() == 2);
@@ -71,7 +75,7 @@ public class Produktions_Manager extends Thread
                 
                 bestellungenInProduktion.removeIf(bestellung -> bestellung.gibAlleProdukteProduziert());                
             
-                // Den Thread eine kurze Zeit (0.1s) schlafen lassen, bis zur nächsten Überprüfung
+                // Den Thread eine kurze Zeit (1s) schlafen lassen, bis zur nächsten Überprüfung
                 try {
                     Thread.sleep(1000); 
                 } catch (InterruptedException ie) {
@@ -99,7 +103,7 @@ public class Produktions_Manager extends Thread
             //produkt.setzteProduktionsAblauf(lackierRoboter);
             //produkt.setzteProduktionsAblauf(verpackungsRoboter);
             
-            //Einleiten 1. Produktionsschritt (-> wird Holzverarbeitung sein).
+            //Einleiten 1. Produktionsschritt (-> Holzverarbeitung).
             produkt.naechsteProduktionsStation();      
         }
     }

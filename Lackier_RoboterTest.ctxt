@@ -1,6 +1,13 @@
 #BlueJ class context
 comment0.target=Lackier_RoboterTest
-comment0.text=\r\n\ The\ test\ class\ Lackier_RoboterTest.\r\n\r\n\ @author\ \ (your\ name)\r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Die\ Testklasse\ f\u00FCr\ die\ Klasse\ Lackier_Roboter.\r\n\ \r\n\ @author\ Rafael\ Estermann\r\n\ @version\ 15.12.2024\r\n
 comment1.params=
-comment1.target=void\ testNameAssignment()
-numComments=2
+comment1.target=void\ setUp()
+comment1.text=\r\n\ Anweisungen\ vor\ jedem\ Testlauf.\r\n
+comment2.params=
+comment2.target=void\ tearDown()
+comment2.text=\r\n\ Anweisungen\ nach\ jedem\ Testlauf.\r\n
+comment3.params=
+comment3.target=void\ testNameAssignment()
+comment3.text=\r\n\ Testet,\ ob\ der\ Name\ des\ Roboters\ korrekt\ zugewiesen\ wurde.\r\n
+numComments=4

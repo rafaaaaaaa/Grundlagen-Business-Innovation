@@ -1,198 +1,182 @@
 import java.util.ArrayList;
 
 /**
- * Klasse Bestellung beinhaltet die bestellten Produkte
+ * Die Klasse Bestellung enthält die Details zu einer Bestellung.
+ * Sie verwaltet die bestellten Produkte, die Bestellbestätigung, die Beschaffungszeit und die Lieferzeit.
  *
- * @author Alex Marchese
- * @version 04.12.2024
+ * @author Rafael Estermann
+ * @version 15.12.2024
  */
 public class Bestellung {
-    // Die Liste bestellteProdukte enthält alle Produkte, welche bestellt worden
-    // sind
+    // Liste der bestellten Produkte
     private ArrayList<Produkt> bestellteProdukte;
-    // Die bestellBestaetigung gibt an, ob eine Bestellung bestätigt wurde oder
-    // nicht (boolean)
+
+    // Gibt an, ob die Bestellung bestätigt wurde
     private boolean bestellBestaetigung;
-    // Die Beschaffungszeit gibt an, wie lange die Lieferzeit (in Tage) für die
-    // Produkte ist. -1 ist der Initialisierungswert
+
+    // Beschaffungszeit in Tagen (-1: Initialwert)
     private int beschaffungsZeit;
-    // Jede Bestellung erhält eine Bestellnummer
+
+    // Eindeutige Nummer der Bestellung
     private int bestellungsNr;
-    // Anzahl der bestellten Standardtueren
+
+    // Anzahl der Standardtüren in der Bestellung
     private int anzahlStandardTueren;
-    // Anzahl der bestellten Premiumtueren
+
+    // Anzahl der Premiumtüren in der Bestellung
     private int anzahlPremiumTueren;
 
-    // Die lieferZeit gibt an, wie lange es dauert, bis die Ware rausgeschickt wird.
-    // Lieferzeit = Produktionszeit der bestellten Türen + die Beschaffungszeit der
-    // notwendigen Materialien + die Standardlieferzeit
+    // Lieferzeit in Tagen
     private float lieferZeit;
-    
+
+    // Gibt an, ob alle Produkte der Bestellung produziert wurden
     private boolean alleProdukteProduziert;
 
     /**
-     * Konstruktor für Klasse Bestellung.
-     * Hier werden alle globalen Variablen initialisiert
-     * 
-     * @param standardTueren Anzahl bestellter Standardtüren
-     * @param premiumTueren  Anzahl bestellter Premiumtüren
-     * @param bestellungsNr  Zugeordnete Bestellnummer
+     * Konstruktor der Klasse Bestellung.
+     * Initialisiert die Bestellung und überprüft die Bestellmenge.
+     *
+     * @param anzahlStandardTueren Anzahl der bestellten Standardtüren
+     * @param anzahlPremiumTueren  Anzahl der bestellten Premiumtüren
+     * @param bestellungsNr        Eindeutige Bestellnummer
      */
     public Bestellung(int anzahlStandardTueren, int anzahlPremiumTueren, int bestellungsNr) {
-        // initialise instance variables
-
         this.bestellungsNr = bestellungsNr;
         this.beschaffungsZeit = -1;
         this.lieferZeit = -1;
-        this.bestellteProdukte = new ArrayList<Produkt>();
-        this.bestellBestaetigung = false; // this is optional
-        this.alleProdukteProduziert = false;        
-        
+        this.bestellteProdukte = new ArrayList<>();
+        this.bestellBestaetigung = false;
+        this.alleProdukteProduziert = false;
+
         if (anzahlStandardTueren < 0 || anzahlPremiumTueren < 0) {
             throw new IllegalArgumentException("Ungültige Bestellmenge. Kann nicht negativ sein.");
-            // System.out.println("Ungültige Bestellmenge. Kann nicht negativ sein.");
         } else if (anzahlStandardTueren == 0 && anzahlPremiumTueren == 0) {
             throw new IllegalArgumentException("Die Bestellung muss mindestens ein Produkt enthalten.");
-            // System.out.println("Die Bestellung muss mindestens ein Produkt enthalten.");
         } else if (anzahlStandardTueren > 10_000 || anzahlPremiumTueren > 10_000) {
-            throw new IllegalArgumentException("Bestellmenge ist zu gross. Maximal 10 Tausend pro Artikel.");
-            // System.out.println("Bestellmenge ist zu gross. Maximal 10 Tausend pro
-            // Artikel.");
+            throw new IllegalArgumentException("Bestellmenge ist zu groß. Maximal 10.000 pro Artikel.");
         } else {
             this.anzahlStandardTueren = anzahlStandardTueren;
             this.anzahlPremiumTueren = anzahlPremiumTueren;
             fuelleBestellteprodukte(anzahlStandardTueren, anzahlPremiumTueren);
         }
-
     }
 
     /**
-     * Mit dieser Methode werden die entsprechenden Standardtüren und Premiumtüren
-     * erstellt und zur Liste der bestellten Produkte hinzugefügt
-     * 
-     * @param anzahlStandardTueren Anzahl bestellter Standardtüren
-     * @param anzahlPremiumTueren  Anzahl bestellter Premiumtüren
+     * Füllt die Liste der bestellten Produkte basierend auf der Anzahl von Standard- und Premiumtüren.
+     *
+     * @param anzahlStandardTueren Anzahl der bestellten Standardtüren
+     * @param anzahlPremiumTueren  Anzahl der bestellten Premiumtüren
      */
     private void fuelleBestellteprodukte(int anzahlStandardTueren, int anzahlPremiumTueren) {
-
-        int standardTueren = 0;
-        int premiumTueren = 0;
-
-        while (standardTueren < anzahlStandardTueren) {
+        for (int i = 0; i < anzahlStandardTueren; i++) {
             bestellteProdukte.add(new Standardtuer());
-            standardTueren++; // also here 3 options all fine
         }
-
-        while (premiumTueren < anzahlPremiumTueren) {
+        for (int i = 0; i < anzahlPremiumTueren; i++) {
             bestellteProdukte.add(new Premiumtuer());
-            premiumTueren++; // also here 3 options all fine
         }
     }
 
     /**
-     * Mit dieser Methode wird der Zustand einer Bestellung abgefragt
-     * 
-     * @return bestellBestaetigung Zustand der Bestellbestätigung
+     * Gibt den Bestellstatus zurück.
+     *
+     * @return true, wenn die Bestellung bestätigt wurde, andernfalls false.
      */
     public boolean gibBestellBestaetigung() {
-        return this.bestellBestaetigung; // es geht auch ohne this.
+        return bestellBestaetigung;
     }
 
     /**
-     * Mit dieser Methode wird die Beschaffungszeit für die Bestellung ausgegeben
-     * 
-     * @return beschaffungsZeit
+     * Gibt die Beschaffungszeit in Tagen zurück.
+     *
+     * @return Die Beschaffungszeit der Bestellung.
      */
     public int gibBeschaffungsZeit() {
-        return this.beschaffungsZeit;
+        return beschaffungsZeit;
     }
 
     /**
-     * Mit dieser Methode wird die Beschaffungszeit für die Bestellung gesetzt
-     * 
+     * Setzt die Beschaffungszeit in Tagen.
      *
-     * @param beschaffungszeit wird übergeben
+     * @param beschaffungsZeit Die neue Beschaffungszeit.
      */
     public void setzeBeschaffungsZeit(int beschaffungsZeit) {
         this.beschaffungsZeit = beschaffungsZeit;
     }
 
     /**
-     * Mit dieser Methode wird die Bestellnummer für die Bestellung ausgegeben
-     * 
-     * 
-     * @param bestellungsNr wird retourniert
+     * Gibt die Bestellnummer zurück.
+     *
+     * @return Die eindeutige Bestellnummer.
      */
     public int gibBestellungsNr() {
-        return this.bestellungsNr;
+        return bestellungsNr;
     }
 
     /**
-     * Mit dieser Methode wird die Anzahl der Standardtueren für die Bestellung
-     * ausgegeben
-     * 
-     * 
-     * @return anzahlStandardTueren wird retourniert
+     * Gibt die Anzahl der bestellten Standardtüren zurück.
+     *
+     * @return Die Anzahl der Standardtüren.
      */
     public int gibAnzahlStandardTueren() {
-        return this.anzahlStandardTueren;
+        return anzahlStandardTueren;
     }
 
     /**
-     * Mit dieser Methode wird die Anzahl der Premiumtueren für die Bestellung
-     * ausgegeben
-     * 
-     * 
-     * @return anzahlPremiumTueren wird retourniert
+     * Gibt die Anzahl der bestellten Premiumtüren zurück.
+     *
+     * @return Die Anzahl der Premiumtüren.
      */
     public int gibAnzahlPremiumTueren() {
-        return this.anzahlPremiumTueren;
+        return anzahlPremiumTueren;
     }
 
     /**
-     * Mit dieser Methode wird eine Bestellung bestätigt
-     * 
+     * Bestätigt die Bestellung.
      */
     public void bestellungBestaetigen() {
         this.bestellBestaetigung = true;
     }
 
     /**
-     * Mit dieser Methode wird die Arrayliste mit den bestellten Produkten
-     * zurückgegeben.
-     * Wird für die Unit Testklasse FabrikTest verwendet. Entspricht der Methode
-     * "liefereBestellteProdukte()" aus der UML
-     * 
-     * @return bestellteProdukte wird retourniert
+     * Gibt die Liste der bestellten Produkte zurück.
+     *
+     * @return Die Liste der Produkte.
      */
     public ArrayList<Produkt> gibBestellteProdukte() {
-        return this.bestellteProdukte;
+        return bestellteProdukte;
     }
 
     /**
-     * Mit dieser Methode wird die Lieferzeit für die Bestellung gesetzt
-     * 
-     * @param lieferZeit wird übergeben und gesetzt
-     * 
+     * Setzt die Lieferzeit für die Bestellung.
+     *
+     * @param lieferZeit Die neue Lieferzeit.
      */
     public void setzeLieferzeit(float lieferZeit) {
         this.lieferZeit = lieferZeit;
     }
 
     /**
-     * Mit dieser Methode wird die Lieferzeit für die Bestellung ausgegeben
-     * 
-     * @return lieferZeit wird zurückgegeben
+     * Gibt die Lieferzeit der Bestellung zurück.
+     *
+     * @return Die Lieferzeit in Tagen.
      */
     public float gibLieferzeit() {
-        return this.lieferZeit;
+        return lieferZeit;
     }
-    
-    public void setzeAlleProdukteProduziert(){
+
+    /**
+     * Markiert, dass alle Produkte der Bestellung produziert wurden.
+     */
+    public void setzeAlleProdukteProduziert() {
         alleProdukteProduziert = true;
     }
-    
-    public boolean gibAlleProdukteProduziert(){
+
+    /**
+     * Gibt zurück, ob alle Produkte der Bestellung produziert wurden.
+     *
+     * @return true, wenn alle Produkte produziert wurden, andernfalls false.
+     */
+    public boolean gibAlleProdukteProduziert() {
         return alleProdukteProduziert;
     }
 }

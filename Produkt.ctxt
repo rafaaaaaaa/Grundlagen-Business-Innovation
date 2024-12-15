@@ -1,19 +1,22 @@
 #BlueJ class context
 comment0.target=Produkt
-comment0.text=\r\n\ Klasse\ Produkt\ ist\ eine\ Superklasse\ f\u00FCr\ die\ Klassen\ Premiumtuer\ und\r\n\ Standardtuer\r\n\r\n\ @author\ Rafael\ Estermann\r\n\ @version\ 15.12.2024\r\n
+comment0.text=\r\n\ Die\ Klasse\ Produkt\ ist\ eine\ Superklasse\ f\u00FCr\ die\ Klassen\ Premiumtuer\ und\ Standardtuer.\r\n\ Sie\ repr\u00E4sentiert\ den\ Zustand\ eines\ Produkts\ sowie\ dessen\ Produktionsablauf.\r\n\r\n\ @author\ Rafael\ Estermann\r\n\ @version\ 15.12.2024\r\n
 comment1.params=
 comment1.target=Produkt()
-comment1.text=\r\n\ Konstruktor\r\n
+comment1.text=\r\n\ Konstruktor\ der\ Klasse\ Produkt.\r\n\ Initialisiert\ den\ Zustand\ des\ Produkts\ und\ den\ Produktionsablauf.\r\n
 comment2.params=
 comment2.target=int\ aktuellerZustand()
-comment2.text=\r\n\ Aktueller\ Zustand\ des\ Produkts\ wird\ ausgegeben\r\n\r\n\ @return\ zustand\ Zustand\ des\ Produkt\ wird\ ausgegeben\r\n
+comment2.text=\r\n\ Gibt\ den\ aktuellen\ Zustand\ des\ Produkts\ zur\u00FCck.\r\n\r\n\ @return\ Der\ aktuelle\ Zustand\ des\ Produkts\ (0,\ 1,\ 2\ oder\ 3).\r\n
 comment3.params=zustand
 comment3.target=void\ zustandAendern(int)
-comment3.text=\r\n\ Zustand\ des\ Produkts\ wird\ ge\u00E4ndert\r\n\r\n\ @param\ zustand\ \:\ neuer\ Zustand\ des\ Produkt\r\n
+comment3.text=\r\n\ Setzt\ den\ Zustand\ des\ Produkts\ auf\ einen\ neuen\ Wert.\r\n\r\n\ @param\ zustand\ Der\ neue\ Zustand\ des\ Produkts.\r\n
 comment4.params=roboter
 comment4.target=void\ setzteProduktionsAblauf(Roboter)
+comment4.text=\r\n\ F\u00FCgt\ einen\ Roboter\ zum\ Produktionsablauf\ des\ Produkts\ hinzu.\r\n\r\n\ @param\ roboter\ Der\ Roboter,\ der\ zum\ Produktionsablauf\ hinzugef\u00FCgt\ wird.\r\n
 comment5.params=
 comment5.target=java.util.LinkedList\ gibProduktionsAblauf()
+comment5.text=\r\n\ Gibt\ den\ Produktionsablauf\ des\ Produkts\ zur\u00FCck.\r\n\ Diese\ Methode\ wird\ haupts\u00E4chlich\ f\u00FCr\ Unit-Tests\ verwendet.\r\n\r\n\ @return\ Eine\ Liste\ von\ Robotern,\ die\ Teil\ des\ Produktionsablaufs\ sind.\r\n
 comment6.params=
 comment6.target=void\ naechsteProduktionsStation()
+comment6.text=\r\n\ F\u00FChrt\ den\ n\u00E4chsten\ Produktionsschritt\ f\u00FCr\ das\ Produkt\ aus.\r\n\ Wenn\ der\ Produktionsablauf\ abgeschlossen\ ist,\ wird\ der\ Zustand\ des\ Produkts\ auf\ 2\ gesetzt.\r\n
 numComments=7

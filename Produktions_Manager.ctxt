@@ -1,17 +1,22 @@
 #BlueJ class context
 comment0.target=Produktions_Manager
-comment0.text=\r\n\ Beschreiben\ Sie\ hier\ die\ Klasse\ Produktions_Manager.\r\n\ \r\n\ @author\ Rafael\ Estermann\ \r\n\ @version\ 15.12.2024\r\n
+comment0.text=\r\n\ Die\ Klasse\ Produktions_Manager\ steuert\ die\ Produktionsprozesse,\ verwaltet\ Bestellungen\r\n\ und\ koordiniert\ die\ Roboter\ in\ der\ Fabrik.\r\n\ \r\n\ @author\ Rafael\ Estermann\r\n\ @version\ 15.12.2024\r\n
 comment1.params=meineFabrik\ meinLager
 comment1.target=Produktions_Manager(Fabrik,\ Lager)
-comment1.text=\r\n\ Konstruktor\ f\u00FCr\ Objekte\ der\ Klasse\ Produktions_Manager\r\n
+comment1.text=\r\n\ Konstruktor\ f\u00FCr\ die\ Klasse\ Produktions_Manager.\r\n\ \r\n\ @param\ meineFabrik\ Die\ Fabrik,\ in\ der\ die\ Roboter\ operieren\r\n\ @param\ meinLager\ Das\ Lager,\ aus\ dem\ die\ ben\u00F6tigten\ Materialien\ geliefert\ werden\r\n
 comment2.params=
 comment2.target=void\ run()
+comment2.text=\r\n\ Hauptmethode\ des\ Produktions-Managers,\ die\ kontinuierlich\ Bestellungen\ bearbeitet\r\n\ und\ die\ Produktion\ steuert.\r\n
 comment3.params=bestellung
 comment3.target=void\ fuegeZuVerarbeitendeBestellungHinzu(Bestellung)
+comment3.text=\r\n\ F\u00FCgt\ eine\ neue\ Bestellung\ zur\ Warteschlange\ hinzu.\r\n\ \r\n\ @param\ bestellung\ Die\ hinzuzuf\u00FCgende\ Bestellung\r\n
 comment4.params=
 comment4.target=java.util.LinkedList\ gibZuVerarbeitendeBestellungen()
+comment4.text=\r\n\ Gibt\ die\ Liste\ der\ zu\ verarbeitenden\ Bestellungen\ zur\u00FCck.\r\n\ Diese\ Methode\ wird\ nur\ f\u00FCr\ Unit-Tests\ ben\u00F6tigt.\r\n\ \r\n\ @return\ Die\ Liste\ der\ zu\ verarbeitenden\ Bestellungen\r\n
 comment5.params=
 comment5.target=java.util.LinkedList\ gibBestellungenInProduktion()
+comment5.text=\r\n\ Gibt\ die\ Liste\ der\ Bestellungen\ in\ Produktion\ zur\u00FCck.\r\n\ Diese\ Methode\ wird\ nur\ f\u00FCr\ Unit-Tests\ ben\u00F6tigt.\r\n\ \r\n\ @return\ Die\ Liste\ der\ Bestellungen\ in\ Produktion\r\n
 comment6.params=bestellung
 comment6.target=void\ starteProduktion(Bestellung)
+comment6.text=\r\n\ Startet\ die\ Produktion\ f\u00FCr\ eine\ Bestellung.\r\n\ \r\n\ @param\ bestellung\ Die\ Bestellung,\ deren\ Produkte\ produziert\ werden\ sollen\r\n
 numComments=7

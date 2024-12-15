@@ -1,8 +1,10 @@
 #BlueJ class context
 comment0.target=Holzbearbeitungs_Roboter
-comment0.text=\r\n\ Beschreiben\ Sie\ hier\ die\ Klasse\ Holzbearbeitungs_Roboter.\r\n\ \r\n\ @author\ Rafael\ Estermann\r\n\ @version\ 15.12.2024\r\n
+comment0.text=\r\n\ Diese\ Klasse\ repr\u00E4sentiert\ einen\ Holzbearbeitungs-Roboter,\ der\ Produkte\ bearbeitet,\r\n\ indem\ er\ die\ spezifischen\ Produktionsschritte\ f\u00FCr\ Holzprodukte\ durchf\u00FChrt.\r\n\ \r\n\ @author\ Rafael\ Estermann\r\n\ @version\ 15.12.2024\r\n
 comment1.params=name
 comment1.target=Holzbearbeitungs_Roboter(java.lang.String)
+comment1.text=\r\n\ Konstruktor\ f\u00FCr\ die\ Klasse\ Holzbearbeitungs_Roboter.\r\n\ \r\n\ @param\ name\ Der\ Name\ des\ Roboters\r\n
 comment2.params=produkt
 comment2.target=void\ produziereProdukt(Produkt)
+comment2.text=\r\n\ Produziert\ ein\ Produkt,\ indem\ die\ Bearbeitungszeit\ f\u00FCr\ Standardt\u00FCren\ und\ Premiumt\u00FCren\ simuliert\ wird.\r\n\ F\u00FChrt\ den\ n\u00E4chsten\ Produktionsschritt\ ein,\ nachdem\ der\ aktuelle\ abgeschlossen\ ist.\r\n\ \r\n\ @param\ produkt\ Das\ zu\ produzierende\ Produkt\r\n
 numComments=3

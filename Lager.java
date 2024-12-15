@@ -5,9 +5,10 @@ import java.util.concurrent.*;
  * in dem die für die Produktion benötigten Materialien gelagert werden.
  *
  * @author Rafael Estermann
- * @version 04.12.2024
+ * @version 15.12.2024
  */
 public class Lager {
+
     private static final int MAXHOLZEINHEITEN = 1000;
     private static final int MAXSCHRAUBEN = 5000;
     private static final int MAXFARBEEINHEITEN = 1000;
@@ -19,34 +20,31 @@ public class Lager {
     private int vorhandeneFarbeeinheiten;
     private int vorhandeneKartoneinheiten;
     private int vorhandeneGlaseinheiten;
-    
+
     private ExecutorService executorService;
     private Lieferant lieferant;
 
     /**
-     * Konstruktor der Klasse Lager
+     * Konstruktor der Klasse Lager.
+     * 
+     * @param executorService Der ExecutorService für asynchrone Aufgaben
      */
     public Lager(ExecutorService executorService) {
-
         this.vorhandeneHolzeinheiten = MAXHOLZEINHEITEN;
         this.vorhandeneSchrauben = MAXSCHRAUBEN;
         this.vorhandeneFarbeeinheiten = MAXFARBEEINHEITEN;
         this.vorhandeneKartoneinheiten = MAXKARTONEINHEITEN;
         this.vorhandeneGlaseinheiten = MAXGLASEINHEITEN;
-        
-        // ExecutorService für asynchrone Aufgaben
+
         this.executorService = executorService;
-        lieferant = new Lieferant();
+        this.lieferant = new Lieferant();
     }
 
     /**
-     * Methode gibBeschaffungsZeit liefert die Beschaffungszeit in Tagen:
-     * 0 Tage, wenn alle Materialien vorhanden sind und
-     * 2 Tage, wenn diese nachbestellt werden müssen
-     *
-     * @param Bestellung: eine Kundenbestellung mit allen bestellten Produkten im
-     *                    Array of Produkt
-     * @return: Beschaffungszeit in Tagen
+     * Berechnet die Beschaffungszeit basierend auf dem Materialbedarf.
+     * 
+     * @param kundenBestellung Die Kundenbestellung mit den benötigten Produkten
+     * @return Die Beschaffungszeit in Tagen (0 oder 2 Tage)
      */
     public int gibBeschaffungsZeit(Bestellung kundenBestellung) {
         int benoetigteHolzeinheiten = 0;
@@ -62,7 +60,6 @@ public class Lager {
                 benoetigteSchrauben += Standardtuer.gibSchrauben();
                 benoetigteFarbeeinheiten += Standardtuer.gibFarbeinheiten();
                 benoetigteKartoneinheiten += Standardtuer.gibKartoneinheiten();
-
             } else if (produkt instanceof Premiumtuer) {
                 benoetigteHolzeinheiten += Premiumtuer.gibHolzeinheiten();
                 benoetigteSchrauben += Premiumtuer.gibSchrauben();
@@ -72,25 +69,29 @@ public class Lager {
             }
         }
 
-        // Wenn die benötigten Matierialien für die Bestellung alle vorhanden sind...
-        if (benoetigteHolzeinheiten <= this.vorhandeneHolzeinheiten &&
-                benoetigteSchrauben <= this.vorhandeneSchrauben &&
-                benoetigteFarbeeinheiten <= this.vorhandeneFarbeeinheiten &&
-                benoetigteKartoneinheiten <= this.vorhandeneKartoneinheiten &&
-                benoetigteGlaseinheiten <= this.vorhandeneGlaseinheiten) {
-            return 0; // .. keine 2 Tage zusätzlich
+        // Überprüfung des Materialbestands
+        if (benoetigteHolzeinheiten <= vorhandeneHolzeinheiten &&
+                benoetigteSchrauben <= vorhandeneSchrauben &&
+                benoetigteFarbeeinheiten <= vorhandeneFarbeeinheiten &&
+                benoetigteKartoneinheiten <= vorhandeneKartoneinheiten &&
+                benoetigteGlaseinheiten <= vorhandeneGlaseinheiten) {
+            return 0; // Keine zusätzliche Zeit erforderlich
         }
-
-        return 2; // .. sonst 2 Tage für Nachbestellung der Materialien beim Lieferanten
+        return 2; // Zwei Tage für Nachbestellung
     }
-    
+
+    /**
+     * Liefert die benötigten Materialien für eine Bestellung aus dem Lager.
+     * 
+     * @param kundenBestellung Die Kundenbestellung, für die Materialien geliefert werden
+     */
     public void wareLiefern(Bestellung kundenBestellung) {
         int benoetigteHolzeinheiten = 0;
         int benoetigteSchrauben = 0;
         int benoetigteFarbeeinheiten = 0;
         int benoetigteKartoneinheiten = 0;
         int benoetigteGlaseinheiten = 0;
-        
+
         // Berechnung der zu reduzierenden Materialien
         for (Produkt produkt : kundenBestellung.gibBestellteProdukte()) {
             if (produkt instanceof Standardtuer) {
@@ -98,7 +99,6 @@ public class Lager {
                 benoetigteSchrauben += Standardtuer.gibSchrauben();
                 benoetigteFarbeeinheiten += Standardtuer.gibFarbeinheiten();
                 benoetigteKartoneinheiten += Standardtuer.gibKartoneinheiten();
-
             } else if (produkt instanceof Premiumtuer) {
                 benoetigteHolzeinheiten += Premiumtuer.gibHolzeinheiten();
                 benoetigteSchrauben += Premiumtuer.gibSchrauben();
@@ -107,121 +107,69 @@ public class Lager {
                 benoetigteGlaseinheiten += Premiumtuer.gibGlaseinheiten();
             }
         }
-        
-        //Reduzierung des Lagerbestandes
+
+        // Reduzierung des Lagerbestands
         vorhandeneHolzeinheiten -= benoetigteHolzeinheiten;
         vorhandeneSchrauben -= benoetigteSchrauben;
         vorhandeneFarbeeinheiten -= benoetigteFarbeeinheiten;
         vorhandeneKartoneinheiten -= benoetigteKartoneinheiten;
-        vorhandeneGlaseinheiten -= benoetigteGlaseinheiten; 
-        
-        System.out.println("Ware für Produktion der Bestellung " + kundenBestellung.gibBestellungsNr() + " an Fabrik geliefert: " +
-        "Holz=" + benoetigteHolzeinheiten + ", " +
-        "Schrauben=" + benoetigteSchrauben + ", " +
-        "Farbe=" + benoetigteFarbeeinheiten + ", " +
-        "Kartons=" + benoetigteKartoneinheiten + ", " +
-        "Glas=" + benoetigteGlaseinheiten);
+        vorhandeneGlaseinheiten -= benoetigteGlaseinheiten;
+
+        System.out.println("Ware für Produktion der Bestellung " + kundenBestellung.gibBestellungsNr() + " geliefert.");
     }
 
     /**
-     * Methode lagerAuffuellen bestellt alle Materialien nach, so dass
-     * das Lager wieder voll ist.
-     * 
+     * Füllt das Lager wieder vollständig auf.
      */
     public void lagerAuffuellen() {
-
         int zuBestellendeHolzeinheiten = MAXHOLZEINHEITEN - vorhandeneHolzeinheiten;
         int zuBestellendeSchrauben = MAXSCHRAUBEN - vorhandeneSchrauben;
         int zuBestellendeFarbeeinheiten = MAXFARBEEINHEITEN - vorhandeneFarbeeinheiten;
         int zuBestellendeKartoneinheiten = MAXKARTONEINHEITEN - vorhandeneKartoneinheiten;
         int zuBestellendeGlaseinheiten = MAXGLASEINHEITEN - vorhandeneGlaseinheiten;
 
-        // Callable für wareBestellen-Methode erstellen, die einen Boolean zurückgibt
-        Callable<Boolean> bestellungTask = () -> lieferant.wareBestellen(zuBestellendeHolzeinheiten, zuBestellendeSchrauben, zuBestellendeFarbeeinheiten, zuBestellendeKartoneinheiten,zuBestellendeGlaseinheiten);
+        Callable<Boolean> bestellungTask = () -> lieferant.wareBestellen(
+                zuBestellendeHolzeinheiten,
+                zuBestellendeSchrauben,
+                zuBestellendeFarbeeinheiten,
+                zuBestellendeKartoneinheiten,
+                zuBestellendeGlaseinheiten);
 
-        // Task ausführen und Future erhalten
         Future<Boolean> future = executorService.submit(bestellungTask);
 
         try {
-            // Warten auf das Ergebnis (true oder false)
-            boolean ergebnis = future.get(); // Ruft das Ergebnis ab (blockiert, bis das Ergebnis verfügbar ist)
+            boolean ergebnis = future.get(); // Blockiert, bis das Ergebnis verfügbar ist
             if (ergebnis) {
                 vorhandeneHolzeinheiten = MAXHOLZEINHEITEN;
                 vorhandeneSchrauben = MAXSCHRAUBEN;
                 vorhandeneFarbeeinheiten = MAXFARBEEINHEITEN;
                 vorhandeneKartoneinheiten = MAXKARTONEINHEITEN;
                 vorhandeneGlaseinheiten = MAXGLASEINHEITEN;
-                System.out.println("Lager wurde wieder aufgefüllt!");
-            }
-            
-            else {
-                System.out.println("Ware konnte nicht nachbestellt werden!");
+                System.out.println("Lager wurde aufgefüllt!");
+            } else {
+                System.out.println("Auffüllen des Lagers fehlgeschlagen!");
             }
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
         }
-           
     }
 
     /**
-     * Methode gibt den Zustand der Materialien auf Lager an
+     * Gibt den aktuellen Lagerbestand aus.
      */
     public void lagerBestandAusgeben() {
         System.out.println("Lagerbestand:");
-        System.out.println("Vorhandene Holzeinheiten: " + vorhandeneHolzeinheiten +
-                " Vorhandene Schrauben: " + vorhandeneSchrauben +
-                " Vorhandene Farbeeinheiten: " + vorhandeneFarbeeinheiten +
-                " Vorhandene Kartoneinheiten: " + vorhandeneKartoneinheiten +
-                " Vorhandene Glaseinheiten: " + vorhandeneGlaseinheiten + "\n\n");
-    }
-    
-    /**
-     * Gibt die vorhandenen Holzeinheiten zurück.
-     * Diese Methode wird für Unit-Tests benötigt.
-     *
-     * @return Die Anzahl der vorhandenen Holzeinheiten.
-     */
-    public int gibVorhandeneHolzeinheiten() {
-        return vorhandeneHolzeinheiten;
+        System.out.println("Holzeinheiten: " + vorhandeneHolzeinheiten);
+        System.out.println("Schrauben: " + vorhandeneSchrauben);
+        System.out.println("Farbeeinheiten: " + vorhandeneFarbeeinheiten);
+        System.out.println("Kartoneinheiten: " + vorhandeneKartoneinheiten);
+        System.out.println("Glaseinheiten: " + vorhandeneGlaseinheiten);
     }
 
-    /**
-     * Gibt die vorhandenen Schrauben zurück.
-     * Diese Methode wird für Unit-Tests benötigt.
-     *
-     * @return Die Anzahl der vorhandenen Schrauben.
-     */
-    public int gibVorhandeneSchrauben() {
-        return vorhandeneSchrauben;
-    }
-
-    /**
-     * Gibt die vorhandenen Farbeeinheiten zurück.
-     * Diese Methode wird für Unit-Tests benötigt.
-     *
-     * @return Die Anzahl der vorhandenen Farbeeinheiten.
-     */
-    public int gibVorhandeneFarbeeinheiten() {
-        return vorhandeneFarbeeinheiten;
-    }
-
-    /**
-     * Gibt die vorhandenen Kartoneinheiten zurück.
-     * Diese Methode wird für Unit-Tests benötigt.
-     *
-     * @return Die Anzahl der vorhandenen Kartoneinheiten.
-     */
-    public int gibVorhandeneKartoneinheiten() {
-        return vorhandeneKartoneinheiten;
-    }
-
-    /**
-     * Gibt die vorhandenen Glaseinheiten zurück.
-     * Diese Methode wird für Unit-Tests benötigt.
-     *
-     * @return Die Anzahl der vorhandenen Glaseinheiten.
-     */
-    public int gibVorhandeneGlaseinheiten() {
-        return vorhandeneGlaseinheiten;
-    }
+    // Getter für Unit-Tests
+    public int gibVorhandeneHolzeinheiten() { return vorhandeneHolzeinheiten; }
+    public int gibVorhandeneSchrauben() { return vorhandeneSchrauben; }
+    public int gibVorhandeneFarbeeinheiten() { return vorhandeneFarbeeinheiten; }
+    public int gibVorhandeneKartoneinheiten() { return vorhandeneKartoneinheiten; }
+    public int gibVorhandeneGlaseinheiten() { return vorhandeneGlaseinheiten; }
 }

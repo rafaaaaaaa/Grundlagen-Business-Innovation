@@ -1,10 +1,10 @@
 #BlueJ class context
 comment0.target=Lieferant
-comment0.text=\r\n\ Diese\ Klasse\ wird\ verwendet,\ um\ die\ Lieferzeiten\ des\ Lieferanten\ und\ die\r\n\ Bestellung\ \u00FCber\ diesen\ zu\ simulieren.\r\n\r\n\ @author\ Rafael\ Estermann\r\n\ @version\ 14.12l.2024\r\n
+comment0.text=\r\n\ Diese\ Klasse\ wird\ verwendet,\ um\ die\ Lieferzeiten\ des\ Lieferanten\ und\ die\r\n\ Bestellung\ \u00FCber\ diesen\ zu\ simulieren.\r\n\r\n\ @author\ Rafael\ Estermann\r\n\ @version\ 15.12.2024\r\n
 comment1.params=
 comment1.target=Lieferant()
-comment1.text=\r\n\ Konstruktor\ der\ Klasse\ Lieferant\r\n
+comment1.text=\r\n\ Konstruktor\ der\ Klasse\ Lieferant.\r\n\ Erstellt\ eine\ Instanz\ des\ Lieferanten.\r\n
 comment2.params=holzEinheiten\ schrauben\ farbEinheiten\ kartonEinheiten\ glasEinheiten
 comment2.target=boolean\ wareBestellen(int,\ int,\ int,\ int,\ int)
-comment2.text=\r\n\ Mit\ dieser\ Methode\ wird\ die\ Bestellung\ bei\ dem\ Lieferanten\ simuliert\r\n\ und\ eine\ Lieferzeit\ von\ zwei\ Tagen\ (simuliert\ als\ 48\ Sekunden)\ hinzugef\u00FCgt.\r\n\ \r\n\ @param\ holzEinheiten\ \ \ Anzahl\ bestellter\ Holzeinheiten\r\n\ @param\ schrauben\ \ \ \ \ \ \ Anzahl\ bestellter\ Schrauben\r\n\ @param\ farbEinheiten\ \ \ Anzahl\ bestellter\ Farbeinheiten\r\n\ @param\ kartonEinheiten\ Anzahl\ bestellter\ Kartoneinheiten\r\n\ @param\ glasEinheiten\ \ \ Anzahl\ bestellter\ Glaseinheiten\r\n\ @return\ true,\ wenn\ die\ Bestellung\ erfolgreich\ ist\r\n
+comment2.text=\r\n\ Simuliert\ die\ Bestellung\ beim\ Lieferanten\ und\ f\u00FCgt\ eine\ Lieferzeit\ von\r\n\ zwei\ Tagen\ (simuliert\ als\ 48\ Sekunden)\ hinzu.\r\n\ \r\n\ @param\ holzEinheiten\ \ \ Anzahl\ der\ bestellten\ Holzeinheiten\r\n\ @param\ schrauben\ \ \ \ \ \ \ Anzahl\ der\ bestellten\ Schrauben\r\n\ @param\ farbEinheiten\ \ \ Anzahl\ der\ bestellten\ Farbeinheiten\r\n\ @param\ kartonEinheiten\ Anzahl\ der\ bestellten\ Kartoneinheiten\r\n\ @param\ glasEinheiten\ \ \ Anzahl\ der\ bestellten\ Glaseinheiten\r\n\ @return\ true,\ wenn\ die\ Bestellung\ erfolgreich\ abgeschlossen\ wurde,\ false\ bei\ Unterbrechung\r\n
 numComments=3

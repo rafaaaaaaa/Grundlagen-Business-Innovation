@@ -1,18 +1,22 @@
 #BlueJ class context
 comment0.target=ProduktTest
-comment0.text=\r\n\ Klasse\ ProduktTest\r\n\r\n\ @author\ Rafael\ Estermann\r\n\ @version\ 15.12.2024\r\n
+comment0.text=\r\n\ Die\ Testklasse\ f\u00FCr\ die\ Klasse\ Produkt.\r\n\r\n\ @author\ Rafael\ Estermann\r\n\ @version\ 15.12.2024\r\n
 comment1.params=
 comment1.target=void\ setUp()
-comment1.text=\r\n\ Anweisungen\ vor\ jedem\ Testlauf\r\n
+comment1.text=\r\n\ Anweisungen\ vor\ jedem\ Testlauf.\r\n
 comment2.params=
 comment2.target=void\ tearDown()
-comment2.text=\r\n\ Anweisungen\ nach\ jedem\ Testlauf\r\n
+comment2.text=\r\n\ Anweisungen\ nach\ jedem\ Testlauf.\r\n
 comment3.params=
 comment3.target=void\ testeProduktGetter()
+comment3.text=\r\n\ Testet\ die\ Initialisierung\ und\ den\ Getter\ f\u00FCr\ den\ Zustand\ eines\ Produkts.\r\n
 comment4.params=
 comment4.target=void\ testeProduktSetter()
+comment4.text=\r\n\ Testet\ den\ Setter\ f\u00FCr\ den\ Zustand\ eines\ Produkts.\r\n
 comment5.params=
 comment5.target=void\ testRoboterInProduktionsablaufHinzufuegen()
+comment5.text=\r\n\ Testet,\ ob\ ein\ Roboter\ korrekt\ in\ den\ Produktionsablauf\ des\ Produkts\r\n\ hinzugef\u00FCgt\ wird.\r\n
 comment6.params=
 comment6.target=void\ testZustandAendernNachLetzterProduktionsStation()
+comment6.text=\r\n\ Testet,\ ob\ der\ Zustand\ eines\ Produkts\ nach\ Abschluss\ aller\ Produktionsstationen\r\n\ korrekt\ auf\ 2\ gesetzt\ wird.\r\n
 numComments=7

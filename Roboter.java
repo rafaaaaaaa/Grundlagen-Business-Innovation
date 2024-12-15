@@ -13,12 +13,14 @@ public abstract class Roboter extends Thread
     private LinkedList<Produkt> warteschlange;
     private String name;
     private int produktionsZeit;
+    private boolean lastProducedIsPremium = false;
 
     public Roboter(String name)
     {
         //Listen instanzieren
         warteschlange = new LinkedList<Produkt>();    
         this.name = name;
+        lastProducedIsPremium = false; // Default Konfiguration der Maschine Standard
     }
     
     @Override
@@ -26,10 +28,26 @@ public abstract class Roboter extends Thread
         while (true) {
                 // Prüfen, ob eine neues Produkt eingetroffen ist
                 if (!warteschlange.isEmpty()) {
-                    System.out.println(warteschlange.size() + " Produkt(e) in Warteschlange");
+                    System.out.println(warteschlange.size() + " Produkt(e) in " + gibName() + " Warteschlange");
                     
                     // Das nächste Produkt produzieren aus der Liste der zu verarbeitenden Bestellungen entnehmen (wieder: First-in-First-out)
-                    Produkt zuProduzierendesProdukt = warteschlange.removeFirst();                     
+                    Produkt zuProduzierendesProdukt = warteschlange.removeFirst();   
+                    
+                    //Falls Maschine umgerüstet werden muss (+ 1s)
+                    if(zuProduzierendesProdukt instanceof Standardtuer && lastProducedIsPremium || zuProduzierendesProdukt instanceof Premiumtuer && !lastProducedIsPremium) {
+                        try
+                        {
+                            System.out.println("PRODUKTIONSINFO: " + gibName() + " muss umgerüstet werden.");
+                            Thread.sleep(1000);
+                        }
+                        catch (InterruptedException ie)
+                        {
+                            ie.printStackTrace();
+                        }                      
+                    }
+                    
+                    lastProducedIsPremium = (zuProduzierendesProdukt instanceof Premiumtuer);
+                    
                     produziereProdukt(zuProduzierendesProdukt);                    
                 }
             
@@ -54,7 +72,7 @@ public abstract class Roboter extends Thread
     }
     
     //wird nicht auf Basisklasse implementiert, da jeder Roboter eigenn Namen hat
-    public String gibNamen(Produkt produkt){
+    public String gibName(){
         return name;
     }
     

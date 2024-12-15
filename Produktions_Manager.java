@@ -46,21 +46,24 @@ public class Produktions_Manager extends Thread
     public void run() {
           while (true) {
                 // Prüfen, ob eine neue Bestellung eingetroffen ist
-                if (!zuVerarbeitendeBestellungen.isEmpty()) {
-                    // Die nächste Bestellung aus der Liste der zu verarbeitenden Bestellungen entnehmen (First In, First Out)
-                    Bestellung bestellung = zuVerarbeitendeBestellungen.removeFirst();
-                                        
-                    // Bestellung in die Liste der Bestellungen in Produktion verschieben
-                    bestellungenInProduktion.add(bestellung);
+                if (!zuVerarbeitendeBestellungen.isEmpty()) {                    
                     
-                    // Produktion starten 
-                    starteProduktion(bestellung);
+                    //Annahme: keine Paralellisierung bei der Produktion -> immer nur eine Bestellung at a Time (wenn bereits produziert wird, muss gewartet werden, bis Produktion wieder freigegeben).
+                    if(bestellungenInProduktion.size() < 1)
+                    {
+                        // Die nächste Bestellung aus der Liste der zu verarbeitenden Bestellungen entnehmen (First In, First Out)
+                        Bestellung bestellung = zuVerarbeitendeBestellungen.removeFirst();
+                        // Bestellung in die Liste der Bestellungen in Produktion verschieben
+                        bestellungenInProduktion.add(bestellung);
+                        // Produktion starten 
+                        starteProduktion(bestellung);
+                    }                       
                 }           
                 
                 if(zuVerarbeitendeBestellungen.size() != 0){
-                    System.out.println("Zu verarbeitende Bestellungen " + zuVerarbeitendeBestellungen.size());
+                    System.out.println("PRODUKTIONSINFO: Zu verarbeitende Bestellungen " + zuVerarbeitendeBestellungen.size());
                 }
-                               
+                                       
                 //Prüfen ob bestehende Produkte bestehender Bestellungen bereits fertig produziert sind
                 for(Bestellung bestellung : bestellungenInProduktion){
                     ArrayList<Produkt> produkteInBestellung = bestellung.gibBestellteProdukte();

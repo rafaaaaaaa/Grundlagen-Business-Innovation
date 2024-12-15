@@ -77,6 +77,7 @@ public class Fabrik {
 
             // Bestellung bestätigen
             bestellung.bestellungBestaetigen();
+            System.out.println();
             System.out.println("Bestellung aufgegeben");
 
             // Bestellung wird hinzugefügt

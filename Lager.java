@@ -115,7 +115,12 @@ public class Lager {
         vorhandeneKartoneinheiten -= benoetigteKartoneinheiten;
         vorhandeneGlaseinheiten -= benoetigteGlaseinheiten; 
         
-        lagerBestandAusgeben();
+        System.out.println("Ware für Produktion der Bestellung " + kundenBestellung.gibBestellungsNr() + " an Fabrik geliefert: " +
+        "Holz=" + benoetigteHolzeinheiten + ", " +
+        "Schrauben=" + benoetigteSchrauben + ", " +
+        "Farbe=" + benoetigteFarbeeinheiten + ", " +
+        "Kartons=" + benoetigteKartoneinheiten + ", " +
+        "Glas=" + benoetigteGlaseinheiten);
     }
 
     /**

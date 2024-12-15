@@ -13,24 +13,20 @@ public class Main {
         Fabrik testFabrik = new Fabrik();
 
         System.out.println("Willkommen bei der AEKI Fabrik.");      
-
-        testFabrik.bestellungAufgeben(3, 2);        
-        testFabrik.bestellungAufgeben(1, 0);     
         
+        //Simulierung von eingehenden Bestellungen.
         try {
-             Thread.sleep(15000);
-             testFabrik.bestellungAufgeben(1, 0);           
-             
-             Thread.sleep(2000);
-             testFabrik.bestellungAufgeben(2, 5);
-             testFabrik.bestellungAufgeben(4, 9);
-             testFabrik.bestellungAufgeben(1, 6);
-             
-             Thread.sleep(2000);
-             testFabrik.bestellungAufgeben(3, 8);
+            testFabrik.bestellungAufgeben(1, 3);           
+            Thread.sleep(10000);
+            testFabrik.bestellungAufgeben(2, 0);    
+            Thread.sleep(10000);
+            testFabrik.bestellungAufgeben(1, 1);
+            testFabrik.bestellungAufgeben(1, 1);
+            Thread.sleep(2000);
+            testFabrik.bestellungAufgeben(0, 1);
         }
         catch(Exception e){
-            
+            System.out.println(e);    
         }
 
     }

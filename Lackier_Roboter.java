@@ -15,9 +15,4 @@ public class Lackier_Roboter extends Roboter
     public void produziereProdukt(Produkt produkt) {     
      //nicht zu implementieren laut Aufgabenstellung       
     }   
-   
-    @Override
-    public String gibNamen(Produkt produkt){
-        return "Lackier Roboter";
-    }
 }

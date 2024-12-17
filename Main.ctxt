@@ -1,6 +1,15 @@
 #BlueJ class context
 comment0.target=Main
-comment0.text=\r\n\ Die\ Klasse\ Main\ ist\ die\ Hauptklasse\ des\ Programms.\r\n\ Hier\ befindet\ sich\ die\ main\ Methode\ zum\ Starten\ des\ Programms.\r\n\r\n\ @author\ Alex\ Marchese\r\n\ @version\ 04.12.2024\r\n
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
-numComments=2
+comment2.params=row\ column
+comment2.target=boolean\ isCellEditable(int,\ int)
+comment3.params=row\ column
+comment3.target=javax.swing.table.TableCellRenderer\ getCellRenderer(int,\ int)
+comment4.params=e
+comment4.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment5.params=e
+comment5.target=void\ actionPerformed(java.awt.event.ActionEvent)
+comment6.params=tableModel\ fabrik
+comment6.target=void\ updateTable(javax.swing.table.DefaultTableModel,\ Fabrik)
+numComments=7

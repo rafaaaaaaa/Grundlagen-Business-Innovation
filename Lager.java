@@ -1,4 +1,6 @@
 import java.util.concurrent.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Die Klasse Lager implementiert die Funktionalität eines Lagers,
@@ -116,6 +118,28 @@ public class Lager {
         vorhandeneGlaseinheiten -= benoetigteGlaseinheiten;
 
         System.out.println("Ware für Produktion der Bestellung " + kundenBestellung.gibBestellungsNr() + " geliefert.");
+    }
+
+    
+    public Map<String, Integer> gibLagerBestand() {
+        Map<String, Integer> lagerBestand = new HashMap<>();
+        lagerBestand.put("Holzeinheiten", vorhandeneHolzeinheiten);
+        lagerBestand.put("Schrauben", vorhandeneSchrauben);
+        lagerBestand.put("Farbeinheiten", vorhandeneFarbeeinheiten);
+        lagerBestand.put("Kartoneinheiten", vorhandeneKartoneinheiten);
+        lagerBestand.put("Glaseinheiten", vorhandeneGlaseinheiten);
+        return lagerBestand;
+}
+
+    
+    public Map<String, Integer> gibMaxLagerBestand() {
+        Map<String, Integer> maxBestand = new HashMap<>();
+        maxBestand.put("Holzeinheiten", MAXHOLZEINHEITEN);
+        maxBestand.put("Schrauben", MAXSCHRAUBEN);
+        maxBestand.put("Farbeinheiten", MAXFARBEEINHEITEN);
+        maxBestand.put("Kartoneinheiten", MAXKARTONEINHEITEN);
+        maxBestand.put("Glaseinheiten", MAXGLASEINHEITEN);
+        return maxBestand;
     }
 
     /**

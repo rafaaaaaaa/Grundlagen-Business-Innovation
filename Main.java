@@ -2,6 +2,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
+import javax.swing.table.TableCellEditor;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,72 +27,86 @@ public class Main {
         titleLabel.setPreferredSize(new Dimension(800, 50));
         frame.add(titleLabel, BorderLayout.NORTH);
 
-        // Input panel at the top with GridBagLayout for better alignment
-        JPanel inputPanel = new JPanel(new GridBagLayout());
-        inputPanel.setPreferredSize(new Dimension(800, 150));
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.insets = new Insets(5, 5, 5, 5);
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.weightx = 1.0;
+// Input panel at the top with GridBagLayout for better alignment
+JPanel inputPanel = new JPanel(new GridBagLayout());
+inputPanel.setPreferredSize(new Dimension(800, 150));
+GridBagConstraints gbc = new GridBagConstraints();
+gbc.insets = new Insets(5, 5, 5, 5);
+gbc.fill = GridBagConstraints.HORIZONTAL;
+gbc.weightx = 1.0;
 
-        JLabel label1 = new JLabel("Anzahl Standardtüren:");
-        JTextField textField1 = new JTextField();
-        textField1.setPreferredSize(new Dimension(150, 25));
+JLabel label1 = new JLabel("Anzahl Standardtüren:");
+JTextField textField1 = new JTextField();
+textField1.setPreferredSize(new Dimension(150, 25));
+textField1.setText("0"); // Default value
 
-        JLabel label2 = new JLabel("Anzahl Premiumtüren:");
-        JTextField textField2 = new JTextField();
-        textField2.setPreferredSize(new Dimension(150, 25));
+JLabel label2 = new JLabel("Anzahl Premiumtüren:");
+JTextField textField2 = new JTextField();
+textField2.setPreferredSize(new Dimension(150, 25));
+textField2.setText("0"); // Default value
 
-        JButton orderButton = new JButton("Bestellen");
-        orderButton.setPreferredSize(new Dimension(100, 30));
+JButton orderButton = new JButton("Bestellen");
+orderButton.setPreferredSize(new Dimension(100, 30));
 
-        // First row: Label 1 and TextField 1
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        inputPanel.add(label1, gbc);
+// First row: Label 1 and TextField 1
+gbc.gridx = 0;
+gbc.gridy = 0;
+inputPanel.add(label1, gbc);
 
-        gbc.gridx = 1;
-        inputPanel.add(textField1, gbc);
+gbc.gridx = 1;
+inputPanel.add(textField1, gbc);
 
-        // Second row: Label 2 and TextField 2
-        gbc.gridx = 0;
-        gbc.gridy = 1;
-        inputPanel.add(label2, gbc);
+// Second row: Label 2 and TextField 2
+gbc.gridx = 0;
+gbc.gridy = 1;
+inputPanel.add(label2, gbc);
 
-        gbc.gridx = 1;
-        inputPanel.add(textField2, gbc);
+gbc.gridx = 1;
+inputPanel.add(textField2, gbc);
 
-        // Third row: Order Button centered
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        gbc.gridwidth = 2;
-        gbc.anchor = GridBagConstraints.CENTER;
-        inputPanel.add(orderButton, gbc);
+// Third row: Order Button centered
+gbc.gridx = 0;
+gbc.gridy = 2;
+gbc.gridwidth = 2;
+gbc.anchor = GridBagConstraints.CENTER;
+inputPanel.add(orderButton, gbc);
+
 
         // Wrapper panel to stick inputPanel to the top
         JPanel topPanel = new JPanel(new BorderLayout());
         topPanel.add(inputPanel, BorderLayout.NORTH);
 
         // Table to display orders
-        String[] columnNames = {"BestellungsNr", "Anzahl Standardtüren", "Anzahl Premiumtüren", "Lieferzeit", "Bestellstatus", "Fortschritt"};
+        String[] columnNames = {"BestellungsNr", "Anzahl Standardtüren", "Anzahl Premiumtüren", "Lieferzeit", "Bestellstatus", "Fortschritt", ""};
         DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
-                return false;
+                return column == 6; // Only the button column is editable
             }
         };
         JTable table = new JTable(tableModel) {
-            @Override
-            public TableCellRenderer getCellRenderer(int row, int column) {
-                if (column == 5) { // Last column for progress bars
-                    return new ProgressBarRenderer();
-                } else if (column == 4) { // Status column
-                    return new StatusRenderer();
-                } else {
-                    return super.getCellRenderer(row, column);
-                }
-            }
-        };
+    @Override
+    public TableCellRenderer getCellRenderer(int row, int column) {
+        if (column == 5) { // Progress column
+            return new ProgressBarRenderer();
+        } else if (column == 4) { // Status column
+            return new StatusRenderer();
+        } else if (column == 6) { // Button column
+            return new ButtonRenderer();
+        } else {
+            return super.getCellRenderer(row, column);
+        }
+    }
+
+ @Override
+public TableCellEditor getCellEditor(int row, int column) {
+    if (column == 6) { // Button column
+        return new ButtonEditor(new JCheckBox(), this, fabrik); // Pass fabrik instance here
+    } else {
+        return super.getCellEditor(row, column);
+    }
+}
+};
         JScrollPane tableScrollPane = new JScrollPane(table);
         tableScrollPane.setPreferredSize(new Dimension(800, 400)); // Increased minimum height
 
@@ -174,23 +189,27 @@ public class Main {
         lagerPanel.add(refillPanel, BorderLayout.SOUTH);
 
         // Button action listener
-        orderButton.addActionListener(e -> {
-            try {
-                int standardTueren = Integer.parseInt(textField1.getText());
-                int premiumTueren = Integer.parseInt(textField2.getText());
+orderButton.addActionListener(e -> {
+    try {
+        int standardTueren = Integer.parseInt(textField1.getText());
+        int premiumTueren = Integer.parseInt(textField2.getText());
 
-                fabrik.bestellungAufgeben(standardTueren, premiumTueren);
-                updateTable(tableModel, fabrik);
-                updateLagerbestand(lagerModel, fabrik);
+        // Bestellung in die Fabrik hinzufügen
+        fabrik.bestellungAufgeben(standardTueren, premiumTueren);
 
-                textField1.setText("");
-                textField2.setText("");
-            } catch (NumberFormatException ex) {
-                JOptionPane.showMessageDialog(frame, "Bitte gültige Zahlen eingeben!", "Eingabefehler", JOptionPane.ERROR_MESSAGE);
-            } catch (IllegalArgumentException ex) {
-                JOptionPane.showMessageDialog(frame, ex.getMessage(), "Eingabefehler", JOptionPane.ERROR_MESSAGE);
-            }
-        });
+        // Tabelle und Lagerbestand aktualisieren
+        updateTable(tableModel, fabrik);
+        updateLagerbestand(lagerModel, fabrik);
+
+        // Eingabefelder zurücksetzen
+        textField1.setText("0");
+        textField2.setText("0");
+    } catch (NumberFormatException ex) {
+        JOptionPane.showMessageDialog(frame, "Bitte gültige Zahlen eingeben!", "Eingabefehler", JOptionPane.ERROR_MESSAGE);
+    } catch (IllegalArgumentException ex) {
+        JOptionPane.showMessageDialog(frame, ex.getMessage(), "Eingabefehler", JOptionPane.ERROR_MESSAGE);
+    }
+});
 
         Timer timer = new Timer(1000, e -> {
             updateTable(tableModel, fabrik);
@@ -204,36 +223,53 @@ public class Main {
         frame.setVisible(true);
     }
 
-    private static void updateTable(DefaultTableModel tableModel, Fabrik fabrik) {
-        tableModel.setRowCount(0);
-        for (Bestellung bestellung : fabrik.gibBestellungen()) {
-            String status = bestellung.gibAlleProdukteProduziert() ? "Versandbereit" :
-                    bestellung.gibBestellteProdukte().stream().anyMatch(p -> p.aktuellerZustand() == 1) ? "In Produktion" : "Bestellt";
-            int progress = (int) (bestellung.gibBestellteProdukte().stream().filter(p -> p.aktuellerZustand() == 2).count() * 100.0 / bestellung.gibBestellteProdukte().size());
-            tableModel.addRow(new Object[]{
-                    bestellung.gibBestellungsNr(),
-                    bestellung.gibAnzahlStandardTueren(),
-                    bestellung.gibAnzahlPremiumTueren(),
-                    String.format("%.2f Tage", bestellung.gibLieferzeit()),
-                    status,
-                    progress
-            });
-        }
+ private static void updateTable(DefaultTableModel tableModel, Fabrik fabrik) {
+    tableModel.setRowCount(0); // Clear the table
+
+    for (Bestellung bestellung : fabrik.gibBestellungen()) {
+        // Determine the status based on product conditions
+        String status = bestellung.gibBestellteProdukte().stream().allMatch(p -> p.aktuellerZustand() == 3) ? "Ausgeliefert" :
+                        bestellung.gibAlleProdukteProduziert() ? "Versandbereit" :
+                        bestellung.gibBestellteProdukte().stream().anyMatch(p -> p.aktuellerZustand() == 1) ? "In Produktion" : "Bestellt";
+
+        // Calculate progress percentage
+        int progress = (int) (bestellung.gibBestellteProdukte().stream()
+                .filter(p -> p.aktuellerZustand() == 2 || p.aktuellerZustand() == 3)
+                .count() * 100.0 / bestellung.gibBestellteProdukte().size());
+
+        // Add a row to the table model
+        tableModel.addRow(new Object[]{
+                bestellung.gibBestellungsNr(),
+                bestellung.gibAnzahlStandardTueren(),
+                bestellung.gibAnzahlPremiumTueren(),
+                String.format("%.2f Tage", bestellung.gibLieferzeit()),
+                status,
+                progress
+        });
     }
+}
+
 
     private static void updateLagerbestand(DefaultTableModel lagerModel, Fabrik fabrik) {
         lagerModel.setRowCount(0);
         Map<String, Integer> lagerBestand = fabrik.gibLager().gibLagerBestand();
-        for (Map.Entry<String, Integer> entry : lagerBestand.entrySet()) {
-            int maxBestand = switch (entry.getKey()) {
-                case "Holzeinheiten", "Farbeinheiten", "Kartoneinheiten" -> 1000;
-                case "Schrauben" -> 5000;
-                case "Glaseinheiten" -> 100;
-                default -> 1000;
-            };
-            int progress = (int) (entry.getValue() * 100.0 / maxBestand);
-            lagerModel.addRow(new Object[]{entry.getKey(), progress});
-        }
+          for (Map.Entry<String, Integer> entry : lagerBestand.entrySet()) {
+        int currentStock = entry.getValue(); // Get current stock value
+        int maxBestand = switch (entry.getKey()) {
+            case "Holzeinheiten", "Farbeinheiten", "Kartoneinheiten" -> 1000;
+            case "Schrauben" -> 5000;
+            case "Glaseinheiten" -> 100;
+            default -> 1000;
+        };
+
+        int progress = (int) (currentStock * 100.0 / maxBestand); // Calculate progress percentage
+
+        // ADD THIS LINE HERE
+        String produktartWithStock = entry.getKey() + " (" + currentStock + "/" + maxBestand + ")";
+
+        // Add row to the table model with updated Produktart
+        lagerModel.addRow(new Object[]{produktartWithStock, progress});
+    }
     }
 
     static class ProgressBarRenderer extends JProgressBar implements TableCellRenderer {
@@ -264,3 +300,5 @@ public class Main {
         }
     }
 }
+
+

@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=ButtonEditor
+comment1.params=checkBox\ table\ fabrik
+comment1.target=ButtonEditor(javax.swing.JCheckBox,\ javax.swing.JTable,\ Fabrik)
+comment2.params=table\ value\ isSelected\ row\ column
+comment2.target=java.awt.Component\ getTableCellEditorComponent(javax.swing.JTable,\ java.lang.Object,\ boolean,\ int,\ int)
+comment3.params=
+comment3.target=java.lang.Object\ getCellEditorValue()
+comment4.params=
+comment4.target=boolean\ stopCellEditing()
+comment5.params=
+comment5.target=void\ fireEditingStopped()
+comment6.params=
+comment6.target=void\ performAction()
+numComments=7

@@ -87,6 +87,20 @@ public class Fabrik {
             produktionsManager.fuegeZuVerarbeitendeBestellungHinzu(bestellung);
         }
     }  
+    
+public Bestellung bestellungVersenden(int bestellNr) {
+    for (Bestellung bestellung : gibBestellungen()) {
+        if (bestellung.gibBestellungsNr() == bestellNr) {
+            for (Produkt produkt : bestellung.gibBestellteProdukte()) {
+                produkt.zustandAendern(3); // Mark product as sent
+            }
+            return bestellung; // Exit once the order is processed
+        }
+    }
+    return null;
+}
+
+
 
     /**
      * Mit dieser Methode werden alle Bestellungen ausgegeben

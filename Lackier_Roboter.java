@@ -13,7 +13,7 @@ public class Lackier_Roboter extends Roboter {
      * @param name Der Name des Roboters
      */
     public Lackier_Roboter(String name) {
-        super(name);
+        super(name,18000);
     }
 
     /**
@@ -22,8 +22,8 @@ public class Lackier_Roboter extends Roboter {
      * 
      * @param produkt Das zu lackierende Produkt
      */
-    @Override
+     @Override
     public void produziereProdukt(Produkt produkt) {
-        // Nicht zu implementieren laut Aufgabenstellung
+          // Nicht zu implementieren laut Aufgabenstellung
     }
 }

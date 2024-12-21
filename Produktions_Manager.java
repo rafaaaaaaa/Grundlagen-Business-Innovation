@@ -121,6 +121,23 @@ public class Produktions_Manager extends Thread {
     public LinkedList<Bestellung> gibBestellungenInProduktion() {
         return bestellungenInProduktion;
     }
+    
+    public Holzbearbeitungs_Roboter gibHolzRoboter() {
+        return holzRoboter;
+    }
+    
+    public Montage_Roboter gibMontageRoboter() {
+        return montageRoboter;
+    }
+    
+    public Lackier_Roboter gibLackierRoboter() {
+        return lackierRoboter;
+    }
+    
+    public Verpackungs_Roboter gibVerpackungsRoboter() {
+        return verpackungsRoboter;
+    }
+
 
     /**
      * Startet die Produktion für eine Bestellung.
@@ -137,7 +154,10 @@ public class Produktions_Manager extends Thread {
 
             // Produktionsablauf für das Produkt festlegen
             produkt.setzteProduktionsAblauf(holzRoboter);
-
+            //produkt.setzteProduktionsAblauf(montageRoboter);
+            //produkt.setzteProduktionsAblauf(lackierRoboter);
+            //produkt.setzteProduktionsAblauf(verpackungsRoboter);
+            
             // Ersten Produktionsschritt starten
             produkt.naechsteProduktionsStation();
         }

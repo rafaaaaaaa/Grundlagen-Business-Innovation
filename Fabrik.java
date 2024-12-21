@@ -147,6 +147,10 @@ public Bestellung bestellungVersenden(int bestellNr) {
     public Lager gibLager() {
         return this.lager;
     }
+    
+    public Produktions_Manager gibProduktionsManager() {
+        return produktionsManager;
+    }
 
     /**
      * Diese Methode wird verwendet, um anzugeben, wie oft das Lager aufgefüllt

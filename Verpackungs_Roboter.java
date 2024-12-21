@@ -13,7 +13,7 @@ public class Verpackungs_Roboter extends Roboter {
      * @param name Der Name des Roboters
      */
     public Verpackungs_Roboter(String name) {
-        super(name);
+        super(name, 12000);
     }
 
     /**

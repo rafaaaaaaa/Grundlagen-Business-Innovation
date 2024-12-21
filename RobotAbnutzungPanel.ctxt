@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=RobotAbnutzungPanel
+comment1.params=fabrik
+comment1.target=RobotAbnutzungPanel(Fabrik)
+comment2.params=
+comment2.target=void\ refreshChartData()
+comment2.text=\r\n\ Rebuild\ the\ dataset\ from\ the\ current\ number\ of\ products\ produced\ by\ each\ robot,\r\n\ converting\ that\ to\ a\ percentage\ of\ wear\ (Abnutzung).\r\n
+numComments=3

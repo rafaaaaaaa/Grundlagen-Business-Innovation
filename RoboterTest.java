@@ -147,7 +147,7 @@ public class RoboterTest {
     @Test
     public void testSetzeProduktionszeitWithValidValues() {
         // Arrange
-        Roboter roboter = new Roboter("TestBot");
+        Roboter roboter = new Roboter("TestBot", 0);
 
         // Act
         roboter.setzeProduktionsZeit(500);
@@ -163,7 +163,7 @@ public class RoboterTest {
     @Test
     public void testSetzeProduktionszeitThrowsExceptionForNegativeValues() {
         // Arrange
-        Roboter roboter = new Roboter("TestBot");
+        Roboter roboter = new Roboter("TestBot", 0);
 
         // Act & Assert
         IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,

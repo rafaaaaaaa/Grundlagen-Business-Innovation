@@ -13,7 +13,7 @@ public class Holzbearbeitungs_Roboter extends Roboter {
      * @param name Der Name des Roboters
      */
     public Holzbearbeitungs_Roboter(String name) {
-        super(name);
+        super(name, 24000);
     }
 
     /**
@@ -28,11 +28,11 @@ public class Holzbearbeitungs_Roboter extends Roboter {
             if (produkt instanceof Standardtuer) {
                 // Simulierung der Bearbeitungszeit für eine Standardtür
                 Thread.sleep(166); // 10 Minuten Produktionszeit simuliert (da konsistent mit 48h = 48s hier 166ms)
-                System.out.println("Holz Roboter hat Standardtür Prozessschritt abgeschlossen");
+                System.out.println(gibName() + " hat Standardtür Prozessschritt abgeschlossen");
             } else {
                 // Simulierung der Bearbeitungszeit für eine Premiumtür
                 Thread.sleep(500); // 30 Minuten Produktionszeit simuliert (da konsistent mit 48h = 48s hier 500ms)
-                System.out.println("Holz Roboter hat Premiumtür Prozessschritt abgeschlossen");
+                System.out.println(gibName() + " hat Premiumtür Prozessschritt abgeschlossen");
             }
 
             // Einleiten des nächsten Produktionsschritts

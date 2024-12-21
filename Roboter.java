@@ -13,17 +13,22 @@ public class Roboter extends Thread {
     private String name;
     private int produktionsZeit;
     private boolean lastProducedIsPremium = false;
-
+    private int totalProduziert;
+    private int totalProducableUnits;
+    
+    
     /**
      * Konstruktor für die Klasse Roboter.
      * 
      * @param name Der Name des Roboters
      */
-    public Roboter(String name) {
+    public Roboter(String name, int totalProducableUnits) {
         // Liste initialisieren
         warteschlange = new LinkedList<Produkt>();    
         this.name = name;
+        totalProduziert = 0;
         lastProducedIsPremium = false; // Standardmäßig produziert der Roboter keine Premiumprodukte
+        this.totalProducableUnits = totalProducableUnits;
     }
 
     /**
@@ -56,6 +61,7 @@ public class Roboter extends Thread {
 
                 // Produktionslogik des Produkts ausführen
                 produziereProdukt(zuProduzierendesProdukt);
+                totalProduziert = totalProduziert + 1;
             }
 
             // Thread kurz schlafen lassen, bevor die nächste Überprüfung startet
@@ -108,6 +114,16 @@ public class Roboter extends Thread {
     public LinkedList<Produkt> gibWarteschlange() {
         return warteschlange;
     }
+    
+    /**
+     * Gibt die Anzahl der produzierten Produkte zurück.
+     * 
+     * @return Totale Anzahl Produkte
+     */
+    public int gibTotalProduzierteProdukte() {
+        return totalProduziert;
+    }
+
 
     /**
      * Gibt die aktuelle Produktionszeit des Roboters zurück.
@@ -117,6 +133,10 @@ public class Roboter extends Thread {
      */
     public int gibProduktionszeit() {
         return produktionsZeit;
+    }
+    
+      public int gibTotalProducableUnits() {
+        return totalProducableUnits;
     }
 
     /**

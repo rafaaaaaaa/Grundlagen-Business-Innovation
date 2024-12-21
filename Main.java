@@ -27,49 +27,49 @@ public class Main {
         titleLabel.setPreferredSize(new Dimension(800, 50));
         frame.add(titleLabel, BorderLayout.NORTH);
 
-// Input panel at the top with GridBagLayout for better alignment
-JPanel inputPanel = new JPanel(new GridBagLayout());
-inputPanel.setPreferredSize(new Dimension(800, 150));
-GridBagConstraints gbc = new GridBagConstraints();
-gbc.insets = new Insets(5, 5, 5, 5);
-gbc.fill = GridBagConstraints.HORIZONTAL;
-gbc.weightx = 1.0;
-
-JLabel label1 = new JLabel("Anzahl Standardtüren:");
-JTextField textField1 = new JTextField();
-textField1.setPreferredSize(new Dimension(150, 25));
-textField1.setText("0"); // Default value
-
-JLabel label2 = new JLabel("Anzahl Premiumtüren:");
-JTextField textField2 = new JTextField();
-textField2.setPreferredSize(new Dimension(150, 25));
-textField2.setText("0"); // Default value
-
-JButton orderButton = new JButton("Bestellen");
-orderButton.setPreferredSize(new Dimension(100, 30));
-
-// First row: Label 1 and TextField 1
-gbc.gridx = 0;
-gbc.gridy = 0;
-inputPanel.add(label1, gbc);
-
-gbc.gridx = 1;
-inputPanel.add(textField1, gbc);
-
-// Second row: Label 2 and TextField 2
-gbc.gridx = 0;
-gbc.gridy = 1;
-inputPanel.add(label2, gbc);
-
-gbc.gridx = 1;
-inputPanel.add(textField2, gbc);
-
-// Third row: Order Button centered
-gbc.gridx = 0;
-gbc.gridy = 2;
-gbc.gridwidth = 2;
-gbc.anchor = GridBagConstraints.CENTER;
-inputPanel.add(orderButton, gbc);
+        // Input panel at the top with GridBagLayout for better alignment
+        JPanel inputPanel = new JPanel(new GridBagLayout());
+        inputPanel.setPreferredSize(new Dimension(800, 150));
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.weightx = 1.0;
+        
+        JLabel label1 = new JLabel("Anzahl Standardtüren:");
+        JTextField textField1 = new JTextField();
+        textField1.setPreferredSize(new Dimension(150, 25));
+        textField1.setText("0"); // Default value
+        
+        JLabel label2 = new JLabel("Anzahl Premiumtüren:");
+        JTextField textField2 = new JTextField();
+        textField2.setPreferredSize(new Dimension(150, 25));
+        textField2.setText("0"); // Default value
+        
+        JButton orderButton = new JButton("Bestellen");
+        orderButton.setPreferredSize(new Dimension(100, 30));
+        
+        // First row: Label 1 and TextField 1
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        inputPanel.add(label1, gbc);
+        
+        gbc.gridx = 1;
+        inputPanel.add(textField1, gbc);
+        
+        // Second row: Label 2 and TextField 2
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        inputPanel.add(label2, gbc);
+        
+        gbc.gridx = 1;
+        inputPanel.add(textField2, gbc);
+        
+        // Third row: Order Button centered
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        inputPanel.add(orderButton, gbc);
 
 
         // Wrapper panel to stick inputPanel to the top
@@ -85,28 +85,28 @@ inputPanel.add(orderButton, gbc);
             }
         };
         JTable table = new JTable(tableModel) {
-    @Override
-    public TableCellRenderer getCellRenderer(int row, int column) {
-        if (column == 5) { // Progress column
-            return new ProgressBarRenderer();
-        } else if (column == 4) { // Status column
-            return new StatusRenderer();
-        } else if (column == 6) { // Button column
-            return new ButtonRenderer();
-        } else {
-            return super.getCellRenderer(row, column);
+        @Override
+        public TableCellRenderer getCellRenderer(int row, int column) {
+            if (column == 5) { // Progress column
+                return new ProgressBarRenderer();
+            } else if (column == 4) { // Status column
+                return new StatusRenderer();
+            } else if (column == 6) { // Button column
+                return new ButtonRenderer();
+            } else {
+                return super.getCellRenderer(row, column);
+            }
         }
-    }
 
- @Override
-public TableCellEditor getCellEditor(int row, int column) {
-    if (column == 6) { // Button column
-        return new ButtonEditor(new JCheckBox(), this, fabrik); // Pass fabrik instance here
-    } else {
-        return super.getCellEditor(row, column);
-    }
-}
-};
+         @Override
+        public TableCellEditor getCellEditor(int row, int column) {
+            if (column == 6) { // Button column
+                return new ButtonEditor(new JCheckBox(), this, fabrik); // Pass fabrik instance here
+            } else {
+                return super.getCellEditor(row, column);
+            }
+        }
+        };
         JScrollPane tableScrollPane = new JScrollPane(table);
         tableScrollPane.setPreferredSize(new Dimension(800, 400)); // Increased minimum height
 
@@ -116,6 +116,16 @@ public TableCellEditor getCellEditor(int row, int column) {
         JPanel tablePanel = new JPanel(new BorderLayout());
         tablePanel.add(tableLabel, BorderLayout.NORTH);
         tablePanel.add(tableScrollPane, BorderLayout.CENTER);
+        
+        
+        // Create the Robot Utilization Pie Chart Panel
+        RobotAbnutzungPanel robotAbnutzungPanel = new RobotAbnutzungPanel(fabrik);
+        
+        // For layout, you could, for example, put it in a new tab, or on the side, etc.
+        // For simplicity, let's just place it on the EAST side:
+        frame.add(robotAbnutzungPanel, BorderLayout.EAST);
+        
+        
 
         // Lagerbestand table
         JLabel lagerLabel = new JLabel("Lagerbestand", SwingConstants.LEFT);
@@ -211,9 +221,12 @@ orderButton.addActionListener(e -> {
     }
 });
 
-        Timer timer = new Timer(1000, e -> {
+        Timer timer = new Timer(500, e -> {
             updateTable(tableModel, fabrik);
             updateLagerbestand(lagerModel, fabrik);
+            robotAbnutzungPanel.refreshChartData();
+            robotAbnutzungPanel.revalidate();
+            robotAbnutzungPanel.repaint();
         });
         timer.start();
 
